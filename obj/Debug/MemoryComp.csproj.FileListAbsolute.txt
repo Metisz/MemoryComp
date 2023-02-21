@@ -1,0 +1,17 @@
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.AssemblyReference.cache
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MainWindow.g.cs
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\App.g.cs
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp_MarkupCompile.cache
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp_MarkupCompile.lref
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MemoryComp.exe.config
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MemoryComp.exe
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MemoryComp.pdb
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Jatek.g.cs
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MainWindow.baml
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Jatek.baml
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.g.resources
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.Properties.Resources.resources
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.GenerateResource.cache
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.CoreCompileInputs.cache
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.exe
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.pdb
