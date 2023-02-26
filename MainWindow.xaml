@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryComp"
         mc:Ignorable="d"
-        Title="Majdani Bejelentkeztető" Height="150" Width="215" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Majdani Bejelentkeztető" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button x:Name="btn_start" Content="Start" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_start_Click"/>
+        <Button x:Name="btn_chimp" Content="Csimpánzjáték" HorizontalAlignment="Left" Margin="332,132,0,0" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
     </Grid>
 </Window>

@@ -25,7 +25,7 @@ namespace MemoryComp
 			InitializeComponent();
 		}
 
-		private void btn_start_Click(object sender, RoutedEventArgs e)
+		private void btn_chimp_Start(object sender, RoutedEventArgs e)
 		{
 			Jatek MemoryGame = new Jatek();
 			this.Close();

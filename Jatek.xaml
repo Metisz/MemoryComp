@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryComp"
         mc:Ignorable="d"
-        Title="Jatek" Height="600" Width="600" ResizeMode="NoResize">
-    <Grid x:Name="Grid">
+        Title="Jatek" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <GroupBox  x:Name="gbox_lose" HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" Margin="0,0,0,0" Width="485" BorderThickness="0">
+            <StackPanel>
+                <Label Content="Vége!" HorizontalAlignment="Stretch" FontSize="72" FontWeight="SemiBold" HorizontalContentAlignment="Center" FontFamily="Stencil" VerticalContentAlignment="Center"/>
+                <Label Content="Elért pontszámod:" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Unispace" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Name="lbl_points_earned" Content="0" HorizontalAlignment="Stretch" FontFamily="Unispace" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Button Content="Újra"  Padding="10,0,10,0"/>
+            </StackPanel>
+        </GroupBox>
+        <Grid x:Name="Grid">
+            
+        </Grid>
 
     </Grid>
 </Window>
