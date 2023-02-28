@@ -12,7 +12,7 @@
                 <Label Content="Vége!" HorizontalAlignment="Stretch" FontSize="72" FontWeight="SemiBold" HorizontalContentAlignment="Center" FontFamily="Stencil" VerticalContentAlignment="Center"/>
                 <Label Content="Elért pontszámod:" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Unispace" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                 <Label Name="lbl_points_earned" Content="0" HorizontalAlignment="Stretch" FontFamily="Unispace" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                <Button Content="Újra"  Padding="10,0,10,0"/>
+                <Button x:Name="btn_restart" Content="Újra" Height="40" Margin="150,0,150,0" Click="btn_restart_Click"/>
             </StackPanel>
         </GroupBox>
         <Grid x:Name="Grid">

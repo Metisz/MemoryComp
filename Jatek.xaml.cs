@@ -24,11 +24,11 @@ namespace MemoryComp
 		public List<Button> gombok = new List<Button>();
 		public Random rnd = new Random();
 		private int pont = 0;
-		public string Pont
+		public int Pont
 		{
 			get
 			{
-				return pont.ToString();
+				return pont;
 			}
 			set
 			{
@@ -84,7 +84,7 @@ namespace MemoryComp
 					gbox_lose.Visibility = Visibility.Visible;
 
 					//this.Close();
-					MessageBox.Show($"Összpont: {pont}", "Aztacsuhajjamegamindenségit");
+					//MessageBox.Show($"Összpont: {pont}", "Aztacsuhajjamegamindenségit");
 				}
 			}
 			else
@@ -102,8 +102,15 @@ namespace MemoryComp
 			}
 		}
 
+		private void btn_restart_Click(object sender, RoutedEventArgs e)
+		{
+			gbox_lose.Visibility = Visibility.Hidden;
+			Pont = 0;
+			AddButton(pont + 1);
+		}
+
 		//	//Az INotifyPropertyChange-s dolgok
-	
+
 		//	public event PropertyChangedEventHandler PropertyChanged;
 		//	public void RaisePropertyChange(string propertyname)
 		//	{
@@ -112,7 +119,7 @@ namespace MemoryComp
 		//			PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
 		//		}
 		//	}
-	
+
 		//}
 		//internal interface INotifyPropertyChange
 		//{
