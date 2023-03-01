@@ -4,6 +4,15 @@
              xmlns:local="clr-namespace:MemoryComp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="KarmaFuture" TargetType="Label">
+            <Setter Property="TextElement.FontFamily" Value="/CustomFonts/#Karma Future">
+                
+            </Setter>
+        </Style>
+        <Style x:Key="Gunplay" TargetType="Label">
+            <Setter Property="TextElement.FontFamily" Value="/CustomFonts/#Gunplay">
+
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

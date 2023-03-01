@@ -32,3 +32,4 @@ C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.GenerateResou
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.CoreCompileInputs.cache
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.exe
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.pdb
+C:\Users\mmart\source\repos\MemoryComp\obj\Debug\App.baml

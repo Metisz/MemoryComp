@@ -109,19 +109,26 @@ namespace MemoryComp
 			AddButton(pont + 1);
 		}
 
-		//	//Az INotifyPropertyChange-s dolgok
+        private void btn_quit_Click(object sender, RoutedEventArgs e)
+        {
+			MainWindow Menu = new MainWindow();
+			this.Close();
+			Menu.ShowDialog();
+        }
 
-		//	public event PropertyChangedEventHandler PropertyChanged;
-		//	public void RaisePropertyChange(string propertyname)
-		//	{
-		//		if (PropertyChanged != null)
-		//		{
-		//			PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
-		//		}
-		//	}
+        //	//Az INotifyPropertyChange-s dolgok
 
-		//}
-		//internal interface INotifyPropertyChange
-		//{
-	}
+        //	public event PropertyChangedEventHandler PropertyChanged;
+        //	public void RaisePropertyChange(string propertyname)
+        //	{
+        //		if (PropertyChanged != null)
+        //		{
+        //			PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
+        //		}
+        //	}
+
+        //}
+        //internal interface INotifyPropertyChange
+        //{
+    }
 }

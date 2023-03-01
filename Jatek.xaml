@@ -9,10 +9,11 @@
     <Grid>
         <GroupBox  x:Name="gbox_lose" HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" Margin="0,0,0,0" Width="485" BorderThickness="0">
             <StackPanel>
-                <Label Content="Vége!" HorizontalAlignment="Stretch" FontSize="72" FontWeight="SemiBold" HorizontalContentAlignment="Center" FontFamily="Stencil" VerticalContentAlignment="Center"/>
-                <Label Content="Elért pontszámod:" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Unispace" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                <Label Name="lbl_points_earned" Content="0" HorizontalAlignment="Stretch" FontFamily="Unispace" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Content="Vége" HorizontalAlignment="Stretch" FontSize="72" HorizontalContentAlignment="Center" Style="{StaticResource Gunplay}" VerticalContentAlignment="Center" Foreground="#FFD10000"/>
+                <Label Content="Elért pontszámod:" HorizontalAlignment="Stretch" VerticalAlignment="Top" Style="{StaticResource KarmaFuture}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Name="lbl_points_earned" Content="0" HorizontalAlignment="Stretch" Style="{StaticResource KarmaFuture}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                 <Button x:Name="btn_restart" Content="Újra" Height="40" Margin="150,0,150,0" Click="btn_restart_Click"/>
+                <Button x:Name="btn_QUIT" Content="Kilépés" Height="40" Margin="150,14,150,0" Click="btn_quit_Click"/>
             </StackPanel>
         </GroupBox>
         <Grid x:Name="Grid">
