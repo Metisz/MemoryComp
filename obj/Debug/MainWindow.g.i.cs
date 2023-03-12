@@ -41,7 +41,7 @@ namespace MemoryComp {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 10 "..\..\MainWindow.xaml"
+        #line 12 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_chimp;
         
@@ -81,7 +81,7 @@ namespace MemoryComp {
             case 1:
             this.btn_chimp = ((System.Windows.Controls.Button)(target));
             
-            #line 10 "..\..\MainWindow.xaml"
+            #line 12 "..\..\MainWindow.xaml"
             this.btn_chimp.Click += new System.Windows.RoutedEventHandler(this.btn_chimp_Start);
             
             #line default
