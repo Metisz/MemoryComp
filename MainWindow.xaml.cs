@@ -27,9 +27,17 @@ namespace MemoryComp
 
 		private void btn_chimp_Start(object sender, RoutedEventArgs e)
 		{
-			Jatek MemoryGame = new Jatek();
+			Jatek Chimp_Test = new Jatek();
 			this.Close();
-			MemoryGame.ShowDialog();
+			Chimp_Test.ShowDialog();
 		}
-	}
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+			grd_lar_2.Width = new System.Windows.GridLength(0);
+			grd_lar.Width = 277.7;
+			btn_lar.Content = "Bejelentkezés";
+
+		}
+    }
 }
