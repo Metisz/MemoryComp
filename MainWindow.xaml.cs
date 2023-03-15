@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace MemoryComp
 {
@@ -20,9 +21,13 @@ namespace MemoryComp
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		MySqlConnection connect = new MySqlConnection(
+			"server = localhost; userid = root; password = ; database = MemoryComp"
+			);
 		public MainWindow()
 		{
 			InitializeComponent();
+			
 		}
 
 		private void btn_chimp_Start(object sender, RoutedEventArgs e)
@@ -39,5 +44,28 @@ namespace MemoryComp
 			btn_lar.Content = "Bejelentkezés";
 
 		}
+
+        private void txtb_password_selected(object sender, RoutedEventArgs e)
+        {
+			txt_req.Text = "- Minimum 8 karakterből álljon\n\n- Legyen benne kis- és nagybetű\n\n- Legyen benne szám";
+		}
+
+        private void txtb_username_selected(object sender, RoutedEventArgs e)
+        {
+			txt_req.Text = "- Maximum 20 karakterből álljon\n\n- Ne legyen benne speciális karakter ()<>#&@{{}<łŁ€Í$ß\\|Ä)\n\n- Legyen egyedi";
+		}
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+				connect.Open();
+				anyad.Text = "zsíroskenyér";
+            }
+            catch (Exception ex)
+            {
+				MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
