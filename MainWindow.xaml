@@ -10,10 +10,11 @@
         <Grid x:Name="grd_lar" HorizontalAlignment="Center" Margin="0,210,0,0" VerticalAlignment="Top" Width="500" Height="275">
             <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
                 <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
-                    <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="35,35,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                    <TextBox x:Name="txtb_username" Margin="35,0,35,20" Height="30" TextWrapping="Wrap" Text="" GotFocus="txtb_username_selected"/>
+                    <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="35,25,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
+                    <TextBox x:Name="txtb_username" Margin="35,0,35,10" Height="30" TextWrapping="Wrap" Text="" GotFocus="txtb_username_selected"/>
                     <Label VerticalContentAlignment="Center" Content="Jelszó" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
                     <TextBox x:Name="txtb_password" Margin="35,0,35,20" Height="30" TextWrapping="Wrap" Text="" GotFocus="txtb_password_selected"/>
+                    <ComboBox x:Name="cb_megyek" Margin="35,0,35,0" Loaded="cb_megyek_loaded" GotFocus="cb_megyek_selected"/>
                     <Button x:Name="btn_lar" Content="Regisztrálás" Height="30" Margin="70,20,70,0" Click="Button_Click"/>
                 </StackPanel>
 
