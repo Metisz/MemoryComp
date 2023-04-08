@@ -7,56 +7,83 @@
         mc:Ignorable="d"
         Title="Főmenü" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid x:Name="grd_lar" HorizontalAlignment="Center" Margin="0,210,0,0" VerticalAlignment="Top" Width="500" Height="275">
-            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-                <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
-                    <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="35,20,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                    <TextBox x:Name="txtb_username" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_username_selected" VerticalContentAlignment="Center" FontSize="14"/>
-                    <Label VerticalContentAlignment="Center" Content="Jelszó" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                    <TextBox x:Name="txtb_password" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_password_selected" VerticalContentAlignment="Center" FontSize="14"/>
-                    <Label VerticalContentAlignment="Center" Content="Megye" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                    <ComboBox x:Name="cb_megyek" Margin="35,0,35,0" Loaded="cb_megyek_loaded" GotFocus="cb_megyek_selected"/>
-                    <Button x:Name="btn_lar" Content="Regisztrálás" Height="30" Margin="70,20,70,0" Click="Button_Click"/>
-                </StackPanel>
 
-            </Border>
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Label Content="Követelmények:" FontFamily="Yu Gothic UI Semibold" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,20,0,0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontSize="17"/>
-                    <TextBlock x:Name="txt_req" Height="220"  TextWrapping="Wrap" Padding="25,10,20,0" ScrollViewer.CanContentScroll="True">
-
-                    </TextBlock>
-                </StackPanel>
-
-
-            </Border>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"></ColumnDefinition>
-                <ColumnDefinition Name="grd_lar_2" Width="4*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-        </Grid>
         <Label Content="Memória-Versengő" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" FontSize="35"/>
-        <ListBox HorizontalAlignment="Center" Margin="0,222,0,0" VerticalAlignment="Top" Width="377" Height="226" Visibility="Hidden">
-            <Button x:Name="btn_chimp" Content="Csimpánz Teszt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
 
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-            <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-        </ListBox>
-        <GroupBox Header="Csatlakozás teszt" HorizontalAlignment="Left" Height="100" Margin="580,86,0,0" VerticalAlignment="Top" Width="128">
+        <GroupBox Header="Csatlakozás teszt" HorizontalAlignment="Left" Height="100" Margin="613,57,0,0" VerticalAlignment="Top" Width="128">
             <StackPanel>
                 <Button Content="Button" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
                 <TextBox x:Name="csatlakoz_teszt" HorizontalAlignment="Center" Height="23" Margin="0,15,0,0" TextWrapping="Wrap" Text="Teszt" VerticalAlignment="Top" Width="106"/>
-                
+
             </StackPanel>
         </GroupBox>
+
+        <StackPanel x:Name="main_menu" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="500" Height="275">
+            <Button Content="Button"/>
+            <Button Content="Button"/>
+            <Button Content="Button"/>
+        </StackPanel>
+        <TabControl HorizontalAlignment="Center" Height="303" Margin="0,200,0,0" VerticalAlignment="Top" Width="506" Visibility="Hidden">
+            <TabItem Header="Regisztrálás">
+                <Grid x:Name="grd_register" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="500" Height="275">
+                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+                        <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                            <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="35,20,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
+                            <TextBox x:Name="txtb_username" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_username_selected" VerticalContentAlignment="Center" FontSize="14"/>
+                            <Label VerticalContentAlignment="Center" Content="Jelszó" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
+                            <TextBox x:Name="txtb_password" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_password_selected" VerticalContentAlignment="Center" FontSize="14"/>
+                            <Label VerticalContentAlignment="Center" Content="Megye" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
+                            <ComboBox x:Name="cb_megyek" Margin="35,0,35,0" Loaded="cb_megyek_loaded" GotFocus="cb_megyek_selected"/>
+                            <Button x:Name="btn_register" Content="Regisztrálás" Height="30" Margin="70,20,70,0" Click="Button_Click"/>
+                        </StackPanel>
+
+                    </Border>
+                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Label Content="Követelmények:" FontFamily="Yu Gothic UI Semibold" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,20,0,0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontSize="17"/>
+                            <TextBlock x:Name="txt_req" Height="220"  TextWrapping="Wrap" Padding="25,10,20,0" ScrollViewer.CanContentScroll="True">
+
+                            </TextBlock>
+                        </StackPanel>
+
+
+                    </Border>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                        <ColumnDefinition Name="grd_register_2" Width="4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Bejelentkezes">
+                <Grid x:Name="grd_login" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="500" Height="275">
+                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+                        <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                            <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="35,20,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
+                            <TextBox x:Name="txtb_lgn_username" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_username_selected" VerticalContentAlignment="Center" FontSize="14"/>
+                            <Label VerticalContentAlignment="Center" Content="Jelszó" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
+                            <TextBox x:Name="txtb_lgn_password" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_password_selected" VerticalContentAlignment="Center" FontSize="14"/>
+                            <Button x:Name="btn_login" Content="Bejelentkezés" Height="30" Margin="70,20,70,0" Click="Button_Click"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Játékok">
+                <ListBox HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="500" Height="275">
+                    <Button x:Name="btn_chimp" Content="Csimpánz Teszt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                </ListBox>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>
