@@ -33,24 +33,24 @@ namespace MemoryComp
 		public MainWindow()
 		{
 			InitializeComponent();
-			txt_req.Foreground = Brushes.Black;
+			tabitem_register.IsEnabled = false; tabitem_login.IsEnabled = false; tabitem_games.IsEnabled = false;
 			string[] Megyek = new string[19] { "Bács-Kiskun", "Baranya", "Békés", "Borsod-Abaúj-Zemplén", "Csongrád-Csanád", "Fejér", "Győr-Moson-Sopron", "Hajdú-Bihar", "Heves", "Jász-Nagykun-Szolnok", "Komárom-Esztergom", "Nógrád", "Pest", "Somogy", "Szabolcs-Szatmár-Bereg", "Tolna", "Vas", "Veszprém", "Zala" };
 			MegyeToID = new Dictionary<string, int>();
 			for (int i = 0; i < 19; i++) { MegyeToID.Add(Megyek[i], i + 1); }
-			cb_megyek.ItemsSource = Megyek;
-			ControlTemplate ct = cb_megyek.Template;
+			rgstr_cb_megyek.ItemsSource = Megyek;
+			ControlTemplate ct = rgstr_cb_megyek.Template;
 
 			
 		}
-		private void cb_megyek_loaded(object sender, RoutedEventArgs e)
+		private void rgstr_cb_megyek_loaded(object sender, RoutedEventArgs e)
 		{
-			ControlTemplate ct = this.cb_megyek.Template;
-			Popup pop = ct.FindName("PART_Popup", this.cb_megyek) as Popup;
+			ControlTemplate ct = this.rgstr_cb_megyek.Template;
+			Popup pop = ct.FindName("PART_Popup", this.rgstr_cb_megyek) as Popup;
 			pop.Placement = PlacementMode.Top;
 		}
 
 		bool IsNameUnique(string NameInQuestion)
-        {
+    {
 			if (connect.State == ConnectionState.Closed) connect.Open();
 			List<string> test = new List<string>();
 			using (MySqlCommand GetUserNames = new MySqlCommand("SELECT felhnev FROM accounts", connect))
@@ -64,8 +64,7 @@ namespace MemoryComp
 				}
 			}
 			return !test.Contains(NameInQuestion);
-        }
-
+    }
 
 		#endregion
 
@@ -79,28 +78,28 @@ namespace MemoryComp
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			bool[] UsernameReqs = new bool[4] { false ,false, false, true }; //1. A Név egyedi-e| 1. Textbox üres-e | 2. Maximum 20 karakter | 3. Speciális karakterek			
-			UsernameReqs[0] = IsNameUnique(txtb_username.Text);
-			if (txtb_username.Text != null) { UsernameReqs[1] = true; }
-			if (txtb_username.Text.Length <= 20) { UsernameReqs[2] = true; }
-			foreach (char item in @"()<>#&@{{}<łŁ€Í$ß\|ÄäđĐ[]") { if (txtb_username.Text.Contains(item)) UsernameReqs[3] = false; };
+			UsernameReqs[0] = IsNameUnique(rgstr_txtb_username.Text);
+			if (rgstr_txtb_username.Text != null) { UsernameReqs[1] = true; }
+			if (rgstr_txtb_username.Text.Length <= 20) { UsernameReqs[2] = true; }
+			foreach (char item in @"()<>#&@{{}<łŁ€Í$ß\|ÄäđĐ[]") { if (rgstr_txtb_username.Text.Contains(item)) UsernameReqs[3] = false; };
 
 			bool[] PasswordReqs = new bool[4]; //1. Textbox üres-e | 2. Minimum 8 karakter | 3. Kis- és Nagybetűk | 4. Szám van-e
-			if (txtb_password.Text != null) { PasswordReqs[0] = true; }
-			if (txtb_password.Text.Length >= 8) { PasswordReqs[1] = true; }
-			if (txtb_password.Text.Any(char.IsUpper)) { PasswordReqs[2] = true; }
-			foreach (char item in "0123456789") { if (txtb_password.Text.Contains(item)) PasswordReqs[3] = true; };
+			if (rgstr_txtb_password.Text != null) { PasswordReqs[0] = true; }
+			if (rgstr_txtb_password.Text.Length >= 8) { PasswordReqs[1] = true; }
+			if (rgstr_txtb_password.Text.Any(char.IsUpper)) { PasswordReqs[2] = true; }
+			foreach (char item in "0123456789") { if (rgstr_txtb_password.Text.Contains(item)) PasswordReqs[3] = true; };
 
-			if (UsernameReqs.All(x => x) && PasswordReqs.All(x => x) && cb_megyek.SelectedItem != null)
+			if (UsernameReqs.All(x => x) && PasswordReqs.All(x => x) && rgstr_cb_megyek.SelectedItem != null)
             {
 				try
 				{
 					if (connect.State == ConnectionState.Closed) connect.Open();
-					MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO Accounts (felhnev, jelszo, megyeid) VALUES ('{txtb_username.Text}', '{txtb_password.Text}', {MegyeToID[cb_megyek.SelectedItem.ToString()]});", connect);
+					MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO Accounts (felhnev, jelszo, megyeid) VALUES ('{rgstr_txtb_username.Text}', '{rgstr_txtb_password.Text}', {MegyeToID[rgstr_cb_megyek.SelectedItem.ToString()]});", connect);
 
 					RegisterCMD.CommandType = CommandType.Text;
 					//valami oknál fogva nem megy, amúgy megelőzné az SQL Injectiont
-					//RegisterCMD.Parameters.AddWithValue("@Name", txtb_username.Text);
-					//RegisterCMD.Parameters.AddWithValue("@Password", txtb_password.Text);
+					//RegisterCMD.Parameters.AddWithValue("@Name", rgstr_txtb_username.Text);
+					//RegisterCMD.Parameters.AddWithValue("@Password", rgstr_txtb_password.Text);
 					RegisterCMD.ExecuteNonQuery();
 					MessageBox.Show("Faszának kéne hogy legyünk", "mayhaps", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 				}
@@ -124,7 +123,7 @@ namespace MemoryComp
 				if (!PasswordReqs[1]) { hibatext += "- A Jelszó minimum 8 karakter hosszú legyen!\n\n"; }
 				if (!PasswordReqs[2]) { hibatext += "- A Jelszóban legyen kis- és nagybetű is!\n\n"; }
 				if (!PasswordReqs[3]) { hibatext += "- A Jelszóban legyen legalább egy szám!\n\n"; }
-				if (cb_megyek.SelectedItem == null) { hibatext += "- Válasszon ki egy megyét!\n\n"; }
+				if (rgstr_cb_megyek.SelectedItem == null) { hibatext += "- Válasszon ki egy megyét!\n\n"; }
 				MessageBox.Show(hibatext, "Hiba",MessageBoxButton.OK,MessageBoxImage.Error);
 				
 			}
@@ -136,19 +135,19 @@ namespace MemoryComp
         
 
         #region Követelmények
-        private void txtb_password_selected(object sender, RoutedEventArgs e)
+        private void rgstr_txtb_password_selected(object sender, RoutedEventArgs e)
 		{
 			txt_req.Foreground = Brushes.Black;
 			txt_req.Text = "- Minimum 8 karakterből álljon\n\n- Legyen benne kis- és nagybetű\n\n- Legyen benne szám";
 		}
 
-		private void txtb_username_selected(object sender, RoutedEventArgs e)
+		private void rgstr_txtb_username_selected(object sender, RoutedEventArgs e)
 		{
 			txt_req.Foreground = Brushes.Black;
 			txt_req.Text = "- Legyen egyedi\n\n- Maximum 20 karakterből álljon\n\n- Ne legyen benne speciális karakter ( )<>#&@{{}<łŁ€$ß\\|Ä )\n\n";
 			// - Legyen egyedi
 		}
-        private void cb_megyek_selected(object sender, RoutedEventArgs e)
+        private void rgstr_cb_megyek_selected(object sender, RoutedEventArgs e)
         {
 			txt_req.Foreground = Brushes.Black;
 			txt_req.Text = "- Válasszon ki egy megyét a 19 lehetőség közül!";
@@ -168,5 +167,36 @@ namespace MemoryComp
             }
 		}
 
-    }
+		private void MMenuButtonClick(object sender, RoutedEventArgs e)
+		{
+			if (sender == mmenu_account)
+			{
+				main_menu.Visibility = Visibility.Hidden;
+				tabctrl_menus.Visibility = Visibility.Visible;
+				tabitem_login.IsEnabled = true;
+				tabctrl_menus.SelectedItem = tabitem_login;
+			}
+			if (sender == mmenu_guest)
+			{
+				main_menu.Visibility = Visibility.Hidden;
+				tabctrl_menus.Visibility = Visibility.Visible;
+				tabitem_games.IsEnabled = true;
+				tabctrl_menus.SelectedItem = tabitem_games;
+			}
+			if (sender == mmenu_quit)
+			{
+				if (MessageBox.Show("Biztos ki szeretne lépni?", "", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+				{
+					this.Close();
+				}
+			}
+		}
+
+		private void MMenuButtonBackClick(object sender, RoutedEventArgs e)
+		{
+			tabitem_register.IsEnabled = false; tabitem_login.IsEnabled = false; tabitem_games.IsEnabled = false;
+			main_menu.Visibility = Visibility.Visible;
+			tabctrl_menus.Visibility = Visibility.Hidden;
+		}
+	}
 }
