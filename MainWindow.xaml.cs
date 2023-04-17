@@ -33,7 +33,7 @@ namespace MemoryComp
 		public MainWindow()
 		{
 			InitializeComponent();
-			tabitem_register.IsEnabled = false; tabitem_login.IsEnabled = false; tabitem_games.IsEnabled = false;
+			TabItems(false, false, false);
 			string[] Megyek = new string[19] { "Bács-Kiskun", "Baranya", "Békés", "Borsod-Abaúj-Zemplén", "Csongrád-Csanád", "Fejér", "Győr-Moson-Sopron", "Hajdú-Bihar", "Heves", "Jász-Nagykun-Szolnok", "Komárom-Esztergom", "Nógrád", "Pest", "Somogy", "Szabolcs-Szatmár-Bereg", "Tolna", "Vas", "Veszprém", "Zala" };
 			MegyeToID = new Dictionary<string, int>();
 			for (int i = 0; i < 19; i++) { MegyeToID.Add(Megyek[i], i + 1); }
@@ -53,7 +53,7 @@ namespace MemoryComp
     {
 			if (connect.State == ConnectionState.Closed) connect.Open();
 			List<string> test = new List<string>();
-			using (MySqlCommand GetUserNames = new MySqlCommand("SELECT felhnev FROM accounts", connect))
+			using (MySqlCommand GetUserNames = new MySqlCommand("SELECT felhnev FROM accounts;", connect))
 			{
 				using (MySqlDataReader reader = GetUserNames.ExecuteReader())
 				{
@@ -65,7 +65,12 @@ namespace MemoryComp
 			}
 			return !test.Contains(NameInQuestion);
     }
-
+		void TabItems(bool rgstr, bool lgn, bool gms)
+        {
+			tabitem_register.IsEnabled = rgstr;
+			tabitem_login.IsEnabled = lgn;
+			tabitem_games.IsEnabled = gms;
+        }
 		#endregion
 
 		private void btn_chimp_Start(object sender, RoutedEventArgs e)
@@ -101,7 +106,7 @@ namespace MemoryComp
 					//RegisterCMD.Parameters.AddWithValue("@Name", rgstr_txtb_username.Text);
 					//RegisterCMD.Parameters.AddWithValue("@Password", rgstr_txtb_password.Text);
 					RegisterCMD.ExecuteNonQuery();
-					MessageBox.Show("Faszának kéne hogy legyünk", "mayhaps", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+					tabctrl_menus.SelectedItem = tabitem_login;
 				}
 				catch (Exception ex)
 				{
@@ -173,14 +178,14 @@ namespace MemoryComp
 			{
 				main_menu.Visibility = Visibility.Hidden;
 				tabctrl_menus.Visibility = Visibility.Visible;
-				tabitem_login.IsEnabled = true;
+				TabItems(true, true, false);
 				tabctrl_menus.SelectedItem = tabitem_login;
 			}
 			if (sender == mmenu_guest)
 			{
 				main_menu.Visibility = Visibility.Hidden;
 				tabctrl_menus.Visibility = Visibility.Visible;
-				tabitem_games.IsEnabled = true;
+				TabItems(false, false, true);
 				tabctrl_menus.SelectedItem = tabitem_games;
 			}
 			if (sender == mmenu_quit)
@@ -194,9 +199,30 @@ namespace MemoryComp
 
 		private void MMenuButtonBackClick(object sender, RoutedEventArgs e)
 		{
-			tabitem_register.IsEnabled = false; tabitem_login.IsEnabled = false; tabitem_games.IsEnabled = false;
+			TabItems(false, false, false);
 			main_menu.Visibility = Visibility.Visible;
 			tabctrl_menus.Visibility = Visibility.Hidden;
 		}
-	}
+
+        private void lgn_btn_login_Click(object sender, RoutedEventArgs e)
+        {
+			if (connect.State == ConnectionState.Closed) connect.Open();
+			using (MySqlCommand LoginAttempt = new MySqlCommand($"SELECT id, felhnev FROM accounts WHERE felhnev = '{lgn_txtb_username.Text}' AND jelszo = '{lgn_txtb_password.Text}';", connect))
+			{
+				using (MySqlDataReader reader = LoginAttempt.ExecuteReader())
+				{
+					if (reader.HasRows)
+					{
+						TabItems(false, false, true);
+						tabctrl_menus.SelectedItem = tabitem_games;
+					}
+					else
+					{
+						MessageBox.Show("Hibás Felhasználónév/Jelszó kombináció!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
+				}
+			}
+			
+		}
+    }
 }

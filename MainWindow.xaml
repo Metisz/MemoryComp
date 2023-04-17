@@ -18,22 +18,22 @@
             </StackPanel>
         </GroupBox>
 
-        <StackPanel x:Name="main_menu" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="500" Height="275" Visibility="Hidden">
+        <StackPanel x:Name="main_menu" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="500" Height="275">
             <Button x:Name="mmenu_account" Content="Játék Felhasználóként" Height="40" Margin="120,30,120,0" Click="MMenuButtonClick"/>
             <Button x:Name="mmenu_guest" Content="Játék Vendégként" Height="40" Margin="120,40,120,0" Click="MMenuButtonClick"/>
             <Button x:Name="mmenu_quit" Content="Kilépés" Height="40" Margin="120,40,120,0" Click="MMenuButtonClick"/>
         </StackPanel>
-        <TabControl x:Name="tabctrl_menus" HorizontalAlignment="Center" Height="303" Margin="0,200,0,0" VerticalAlignment="Top" Width="506" >
+        <TabControl x:Name="tabctrl_menus" HorizontalAlignment="Center" Height="303" Margin="0,200,0,0" VerticalAlignment="Top" Width="506" Visibility="Hidden">
             <TabItem x:Name="tabitem_register" Header="Regisztrálás">
                 <Grid HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="500" Height="275">
                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
                         <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
                             <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="35,20,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                            <TextBox x:Name="rgstr_txtb_username" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_username_selected" VerticalContentAlignment="Center" FontSize="14"/>
+                            <TextBox x:Name="rgstr_txtb_username" Margin="35,0,35,10" Height="30" Text="" GotFocus="rgstr_txtb_username_selected" VerticalContentAlignment="Center" FontSize="14"/>
                             <Label VerticalContentAlignment="Center" Content="Jelszó" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                            <TextBox x:Name="rgstr_txtb_password" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_password_selected" VerticalContentAlignment="Center" FontSize="14"/>
+                            <TextBox x:Name="rgstr_txtb_password" Margin="35,0,35,10" Height="30" Text="" GotFocus="rgstr_txtb_password_selected" VerticalContentAlignment="Center" FontSize="14"/>
                             <Label VerticalContentAlignment="Center" Content="Megye" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                            <ComboBox x:Name="rgstr_cb_megyek" Margin="35,0,35,0" Loaded="cb_megyek_loaded" GotFocus="cb_megyek_selected"/>
+                            <ComboBox x:Name="rgstr_cb_megyek" Margin="35,0,35,0" Loaded="rgstr_cb_megyek_loaded" GotFocus="rgstr_cb_megyek_selected"/>
                             <Button x:Name="rgstr_btn_register" Content="Regisztrálás" Height="30" Margin="70,20,70,0" Click="Button_Click"/>
                         </StackPanel>
 
@@ -60,11 +60,11 @@
                 <Grid HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="500" Height="275">
                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
                         <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
-                            <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="35,20,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                            <TextBox x:Name="lgn_txtb_username" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_username_selected" VerticalContentAlignment="Center" FontSize="14"/>
-                            <Label VerticalContentAlignment="Center" Content="Jelszó" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                            <TextBox x:Name="lgn_txtb_password" Margin="35,0,35,10" Height="30" Text="" GotFocus="txtb_password_selected" VerticalContentAlignment="Center" FontSize="14"/>
-                            <Button x:Name="lgn_btn_login" Content="Bejelentkezés" Height="30" Margin="70,20,70,0" Click="Button_Click"/>
+                            <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="65,20,65,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
+                            <TextBox x:Name="lgn_txtb_username" Margin="65,0,65,10" Height="30" Text="" VerticalContentAlignment="Center" FontSize="14"/>
+                            <Label VerticalContentAlignment="Center" Content="Jelszó" Margin="65,0,65,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
+                            <TextBox x:Name="lgn_txtb_password" Margin="65,0,65,10" Height="30" Text="" VerticalContentAlignment="Center" FontSize="14"/>
+                            <Button x:Name="lgn_btn_login" Content="Bejelentkezés" Height="30" Margin="70,20,70,0" Click="lgn_btn_login_Click"/>
                             <Label Name="lgn_errlabel" Content="Rossz Felhasználónév és Jelszó kombináció!" HorizontalContentAlignment="Center" Foreground="Red" Visibility="Hidden"/>
                             <Button  Content="Vissza" Margin="30,10,400,0" Click="MMenuButtonBackClick"/>
                         </StackPanel>
@@ -72,19 +72,22 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabitem_games" Header="Játékok">
-                <ListBox HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="500" Height="275">
-                    <Button x:Name="btn_chimp" Content="Csimpánz Teszt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                <StackPanel>
+                    <ListBox HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="500" Height="235">
+                        <Button x:Name="btn_chimp" Content="Csimpánz Teszt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
 
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                    <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
-                </ListBox>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
+                    </ListBox>
+                    <Button  Content="Vissza" Margin="30,10,400,0" Click="MMenuButtonBackClick"/>
+                </StackPanel>
             </TabItem>
         </TabControl>
 
