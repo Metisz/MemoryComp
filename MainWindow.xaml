@@ -10,11 +10,12 @@
 
         <Label Content="Memória-Versengő" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" FontSize="35"/>
 
-        <GroupBox Header="Csatlakozás teszt" HorizontalAlignment="Left" Height="100" Margin="613,57,0,0" VerticalAlignment="Top" Width="128">
+        <GroupBox Header="Csatlakozás teszt" HorizontalAlignment="Left" Height="138" Margin="613,57,0,0" VerticalAlignment="Top" Width="128">
             <StackPanel>
                 <Button Content="Button" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
                 <TextBox x:Name="csatlakoz_teszt" HorizontalAlignment="Center" Height="23" Margin="0,15,0,0" TextWrapping="Wrap" Text="Teszt" VerticalAlignment="Top" Width="106"/>
-
+                <Label Content="Aktív:"/>
+                <Label x:Name="test_activeacc" Content=""/>
             </StackPanel>
         </GroupBox>
 
@@ -86,7 +87,7 @@
                         <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
                         <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_chimp_Start"/>
                     </ListBox>
-                    <Button  Content="Vissza" Margin="30,10,400,0" Click="MMenuButtonBackClick"/>
+                    <Button x:Name="games_back" Content="Vissza" Margin="30,10,400,0" Click="MMenuButtonBackClick"/>
                 </StackPanel>
             </TabItem>
         </TabControl>

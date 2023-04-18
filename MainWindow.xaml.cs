@@ -26,10 +26,12 @@ namespace MemoryComp
 	public partial class MainWindow : Window
 	{
 		#region Kötelező dolgok amiket nem tudom hova kéne rakni
+		//------------------------------------------------------------------------------------------------------
 		Dictionary<string, int> MegyeToID;
 		MySqlConnection connect = new MySqlConnection(
 			"server = localhost; userid = root; password = ; database = MemoryComp"
 			);
+		private Account ActiveAccount;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -38,9 +40,7 @@ namespace MemoryComp
 			MegyeToID = new Dictionary<string, int>();
 			for (int i = 0; i < 19; i++) { MegyeToID.Add(Megyek[i], i + 1); }
 			rgstr_cb_megyek.ItemsSource = Megyek;
-			ControlTemplate ct = rgstr_cb_megyek.Template;
-
-			
+			ControlTemplate ct = rgstr_cb_megyek.Template;	
 		}
 		private void rgstr_cb_megyek_loaded(object sender, RoutedEventArgs e)
 		{
@@ -50,7 +50,7 @@ namespace MemoryComp
 		}
 
 		bool IsNameUnique(string NameInQuestion)
-    {
+		{
 			if (connect.State == ConnectionState.Closed) connect.Open();
 			List<string> test = new List<string>();
 			using (MySqlCommand GetUserNames = new MySqlCommand("SELECT felhnev FROM accounts;", connect))
@@ -64,13 +64,14 @@ namespace MemoryComp
 				}
 			}
 			return !test.Contains(NameInQuestion);
-    }
+		}
 		void TabItems(bool rgstr, bool lgn, bool gms)
         {
 			tabitem_register.IsEnabled = rgstr;
 			tabitem_login.IsEnabled = lgn;
 			tabitem_games.IsEnabled = gms;
         }
+		//------------------------------------------------------------------------------------------------------
 		#endregion
 
 		private void btn_chimp_Start(object sender, RoutedEventArgs e)
@@ -164,6 +165,7 @@ namespace MemoryComp
             {
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				csatlakoz_teszt.Text = "Csatlakozott!";
+				test_activeacc.Content = ActiveAccount.Username;
 				connect.Close();
 			}
             catch (Exception ex)
@@ -200,6 +202,7 @@ namespace MemoryComp
 		private void MMenuButtonBackClick(object sender, RoutedEventArgs e)
 		{
 			TabItems(false, false, false);
+			if (sender == games_back) { ActiveAccount = null; }
 			main_menu.Visibility = Visibility.Visible;
 			tabctrl_menus.Visibility = Visibility.Hidden;
 		}
@@ -213,6 +216,8 @@ namespace MemoryComp
 				{
 					if (reader.HasRows)
 					{
+						reader.Read();
+						ActiveAccount = new Account(reader.GetInt32(0),reader.GetString(1));
 						TabItems(false, false, true);
 						tabctrl_menus.SelectedItem = tabitem_games;
 					}
