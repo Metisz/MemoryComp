@@ -52,18 +52,18 @@ namespace MemoryComp
 		bool IsNameUnique(string NameInQuestion)
 		{
 			if (connect.State == ConnectionState.Closed) connect.Open();
-			List<string> test = new List<string>();
+			List<string> NameList = new List<string>();
 			using (MySqlCommand GetUserNames = new MySqlCommand("SELECT felhnev FROM accounts;", connect))
 			{
 				using (MySqlDataReader reader = GetUserNames.ExecuteReader())
 				{
 					while (reader.Read())
 					{
-						test.Add(reader.GetString(0));
+						NameList.Add(reader.GetString(0));
 					}
 				}
 			}
-			return !test.Contains(NameInQuestion);
+			return !NameList.Contains(NameInQuestion);
 		}
 		void TabItems(bool rgstr, bool lgn, bool gms)
         {
@@ -76,7 +76,7 @@ namespace MemoryComp
 
 		private void btn_chimp_Start(object sender, RoutedEventArgs e)
 		{
-			Jatek Chimp_Test = new Jatek();
+			Jatek Chimp_Test = new Jatek(ActiveAccount);
 			this.Close();
 			Chimp_Test.ShowDialog();
 		}
@@ -101,7 +101,6 @@ namespace MemoryComp
 				{
 					if (connect.State == ConnectionState.Closed) connect.Open();
 					MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO Accounts (felhnev, jelszo, megyeid) VALUES ('{rgstr_txtb_username.Text}', '{rgstr_txtb_password.Text}', {MegyeToID[rgstr_cb_megyek.SelectedItem.ToString()]});", connect);
-
 					RegisterCMD.CommandType = CommandType.Text;
 					//valami oknál fogva nem megy, amúgy megelőzné az SQL Injectiont
 					//RegisterCMD.Parameters.AddWithValue("@Name", rgstr_txtb_username.Text);
@@ -165,7 +164,14 @@ namespace MemoryComp
             {
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				csatlakoz_teszt.Text = "Csatlakozott!";
-				test_activeacc.Content = ActiveAccount.Username;
+                try
+                {
+					test_activeacc.Content = ActiveAccount.Username;
+				}
+                catch (Exception)
+                {
+					test_activeacc.Content = "nope";
+				}
 				connect.Close();
 			}
             catch (Exception ex)
@@ -217,7 +223,7 @@ namespace MemoryComp
 					if (reader.HasRows)
 					{
 						reader.Read();
-						ActiveAccount = new Account(reader.GetInt32(0),reader.GetString(1));
+						ActiveAccount = new Account(reader.GetInt32(0), reader.GetString(1));
 						TabItems(false, false, true);
 						tabctrl_menus.SelectedItem = tabitem_games;
 					}
@@ -227,7 +233,7 @@ namespace MemoryComp
 					}
 				}
 			}
-			
+			connect.Close();
 		}
     }
 }

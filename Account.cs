@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MemoryComp
 {
-    class Account
+    public class Account
     {
-        int userid;
-        string username;
+        private int userid;
+        private string username;
         public Account(int id, string uname)
         {
             userid = id;

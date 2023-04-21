@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +22,12 @@ namespace MemoryComp
 	/// </summary>
 	public partial class Jatek : Window
 	{
-
+		MySqlConnection connect = new MySqlConnection(
+			"server = localhost; userid = root; password = ; database = MemoryComp"
+			);
+		private bool HasAccount;
 		public List<Button> gombok = new List<Button>();
+		private Account ActiveAccount;
 		public Random rnd = new Random();
 		private int pont = 0;
 		public int Pont
@@ -36,7 +42,41 @@ namespace MemoryComp
 			}
 		}
 
-
+		public void Lose()
+        {
+			Grid.Children.Clear();
+			lbl_points_earned.Content = $"{Pont}";
+            if (HasAccount)
+            {
+				if (connect.State == ConnectionState.Closed) connect.Open();
+				using (MySqlCommand HasScore = new MySqlCommand($"SELECT felhid FROM csimpanz where felhid = {ActiveAccount.Userid};", connect))
+				{
+					using (MySqlDataReader reader = HasScore.ExecuteReader())
+					{
+						if (reader.HasRows)
+						{
+							connect.Close(); connect.Open();
+							lbl_newrecord.Visibility = Visibility.Hidden;
+							MySqlCommand RegisterCMD = new MySqlCommand($"UPDATE csimpanz SET rekordpont = {Pont} WHERE felhid = {ActiveAccount.Userid};", connect);
+							RegisterCMD.CommandType = CommandType.Text;
+							RegisterCMD.ExecuteNonQuery();
+						}
+						else
+						{
+							connect.Close(); connect.Open();
+							lbl_newrecord.Visibility = Visibility.Visible;
+							MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO csimpanz (felhid, rekordpont) VALUES ({ActiveAccount.Userid},{Pont});", connect);
+							RegisterCMD.CommandType = CommandType.Text;
+							RegisterCMD.ExecuteNonQuery();
+                            connect.Close();
+							MessageBox.Show("jej");
+						}
+					}
+				}
+				connect.Close();
+            }
+			gbox_lose.Visibility = Visibility.Visible;
+		}
 
 		void AddButton(int i) // i = a ponttal amit előtte elért
 		{
@@ -64,13 +104,19 @@ namespace MemoryComp
 		}
 
 
-		public Jatek()
-		{
+		public Jatek(Account ActiveAccount)
+		{ 
 			InitializeComponent();
+			if (ActiveAccount == null) { HasAccount = false; }
+            else {
+				HasAccount = true;
+				this.ActiveAccount = ActiveAccount;	
+            }
 			DataContext = this;
 			gbox_lose.Visibility = Visibility.Hidden;
 			AddButton(pont+1);
 		}
+
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
@@ -79,9 +125,7 @@ namespace MemoryComp
 			{
 				if (gombok[int.Parse((sender as Button).Tag.ToString()) - 1].IsEnabled == true)
 				{
-					Grid.Children.Clear();
-					lbl_points_earned.Content = $"{Pont}";
-					gbox_lose.Visibility = Visibility.Visible;
+					Lose();
 
 					//this.Close();
 					//MessageBox.Show($"Összpont: {pont}", "Aztacsuhajjamegamindenségit");
