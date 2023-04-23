@@ -43,11 +43,11 @@ namespace MemoryComp
 		}
 
 		public void Lose()
-        {
+    {
 			Grid.Children.Clear();
 			lbl_points_earned.Content = $"{Pont}";
-            if (HasAccount)
-            {
+      if (HasAccount)
+      {
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				using (MySqlCommand HasScore = new MySqlCommand($"SELECT felhid FROM csimpanz where felhid = {ActiveAccount.Userid};", connect))
 				{
@@ -68,13 +68,13 @@ namespace MemoryComp
 							MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO csimpanz (felhid, rekordpont) VALUES ({ActiveAccount.Userid},{Pont});", connect);
 							RegisterCMD.CommandType = CommandType.Text;
 							RegisterCMD.ExecuteNonQuery();
-                            connect.Close();
+              connect.Close();
 							MessageBox.Show("jej");
 						}
 					}
 				}
 				connect.Close();
-            }
+      }
 			gbox_lose.Visibility = Visibility.Visible;
 		}
 

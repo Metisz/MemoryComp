@@ -96,7 +96,7 @@ namespace MemoryComp
 			foreach (char item in "0123456789") { if (rgstr_txtb_password.Text.Contains(item)) PasswordReqs[3] = true; };
 
 			if (UsernameReqs.All(x => x) && PasswordReqs.All(x => x) && rgstr_cb_megyek.SelectedItem != null)
-            {
+			{
 				try
 				{
 					if (connect.State == ConnectionState.Closed) connect.Open();
@@ -115,8 +115,8 @@ namespace MemoryComp
 					connect.Close();
 				}
 			}
-            else
-            {
+			else
+			{
 				string hibatext = "";
 				if (!UsernameReqs[0]) { hibatext += "- Legyen a Felhasználónév egyedi!\n\n"; }
 				if (!UsernameReqs[1]) { hibatext += "- Ne legyen üres a Felhasználónév mező!\n\n"; }
@@ -127,18 +127,18 @@ namespace MemoryComp
 				if (!PasswordReqs[2]) { hibatext += "- A Jelszóban legyen kis- és nagybetű is!\n\n"; }
 				if (!PasswordReqs[3]) { hibatext += "- A Jelszóban legyen legalább egy szám!\n\n"; }
 				if (rgstr_cb_megyek.SelectedItem == null) { hibatext += "- Válasszon ki egy megyét!\n\n"; }
-				MessageBox.Show(hibatext, "Hiba",MessageBoxButton.OK,MessageBoxImage.Error);
-				
+				MessageBox.Show(hibatext, "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+
 			}
             //grd_lar_2.Width = new System.Windows.GridLength(0);
             //grd_lar.Width = 277.7;
             //btn_lar.Content = "Bejelentkezés";
-        }
+    }
 
         
 
-        //Követelmények
-        private void rgstr_object_selected(object sender, RoutedEventArgs e)
+    //Követelmények
+    private void rgstr_object_selected(object sender, RoutedEventArgs e)
 		{
 			if (sender == rgstr_txtb_username) { txt_req.Text = "- Minimum 8 karakterből álljon\n\n- Legyen benne kis- és nagybetű\n\n- Legyen benne szám"; }
 			if (sender == rgstr_txtb_password) { txt_req.Text = "- Legyen egyedi\n\n- Maximum 20 karakterből álljon\n\n- Ne legyen benne speciális karakter ( )<>#&@{{}<łŁ€$ß\\|Ä )\n\n"; }
@@ -147,24 +147,24 @@ namespace MemoryComp
 
 		private void Button_Click_1(object sender, RoutedEventArgs e)
 		{
-            try
-            {
+      try
+      {
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				csatlakoz_teszt.Text = "Csatlakozott!";
-                try
-                {
+        try
+        {
 					test_activeacc.Content = ActiveAccount.Username;
 				}
-                catch (Exception)
-                {
+        catch (Exception)
+        {
 					test_activeacc.Content = "nope";
 				}
 				connect.Close();
 			}
-            catch (Exception ex)
-            {
+      catch (Exception ex)
+      {
 				MessageBox.Show(ex.Message);
-            }
+      }
 		}
 
 		private void MMenuButtonClick(object sender, RoutedEventArgs e)
@@ -200,8 +200,8 @@ namespace MemoryComp
 			tabctrl_menus.Visibility = Visibility.Hidden;
 		}
 
-        private void lgn_btn_login_Click(object sender, RoutedEventArgs e)
-        {
+    private void lgn_btn_login_Click(object sender, RoutedEventArgs e)
+    {
 			if (connect.State == ConnectionState.Closed) connect.Open();
 			using (MySqlCommand LoginAttempt = new MySqlCommand($"SELECT id, felhnev FROM accounts WHERE felhnev = '{lgn_txtb_username.Text}' AND jelszo = '{lgn_txtb_password.Text}';", connect))
 			{
