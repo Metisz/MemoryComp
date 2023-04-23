@@ -81,9 +81,9 @@ namespace MemoryComp
 			Chimp_Test.ShowDialog();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+		private void Register_Click(object sender, RoutedEventArgs e)
 		{
-			bool[] UsernameReqs = new bool[4] { false ,false, false, true }; //1. A Név egyedi-e| 1. Textbox üres-e | 2. Maximum 20 karakter | 3. Speciális karakterek			
+			bool[] UsernameReqs = new bool[4] { false ,false, false, true }; //1. A Név egyedi-e| 2. Textbox üres-e | 3. Maximum 20 karakter | 4. Speciális karakterek			
 			UsernameReqs[0] = IsNameUnique(rgstr_txtb_username.Text);
 			if (rgstr_txtb_username.Text != null) { UsernameReqs[1] = true; }
 			if (rgstr_txtb_username.Text.Length <= 20) { UsernameReqs[2] = true; }
@@ -100,11 +100,9 @@ namespace MemoryComp
 				try
 				{
 					if (connect.State == ConnectionState.Closed) connect.Open();
-					MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO Accounts (felhnev, jelszo, megyeid) VALUES ('{rgstr_txtb_username.Text}', '{rgstr_txtb_password.Text}', {MegyeToID[rgstr_cb_megyek.SelectedItem.ToString()]});", connect);
+					MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO Accounts (felhnev, jelszo, megyeid) " +
+						$"VALUES ('{rgstr_txtb_username.Text}', '{rgstr_txtb_password.Text}', {MegyeToID[rgstr_cb_megyek.SelectedItem.ToString()]});", connect);
 					RegisterCMD.CommandType = CommandType.Text;
-					//valami oknál fogva nem megy, amúgy megelőzné az SQL Injectiont
-					//RegisterCMD.Parameters.AddWithValue("@Name", rgstr_txtb_username.Text);
-					//RegisterCMD.Parameters.AddWithValue("@Password", rgstr_txtb_password.Text);
 					RegisterCMD.ExecuteNonQuery();
 					tabctrl_menus.SelectedItem = tabitem_login;
 				}
@@ -139,25 +137,14 @@ namespace MemoryComp
 
         
 
-        #region Követelmények
-        private void rgstr_txtb_password_selected(object sender, RoutedEventArgs e)
+        //Követelmények
+        private void rgstr_object_selected(object sender, RoutedEventArgs e)
 		{
-			txt_req.Foreground = Brushes.Black;
-			txt_req.Text = "- Minimum 8 karakterből álljon\n\n- Legyen benne kis- és nagybetű\n\n- Legyen benne szám";
+			if (sender == rgstr_txtb_username) { txt_req.Text = "- Minimum 8 karakterből álljon\n\n- Legyen benne kis- és nagybetű\n\n- Legyen benne szám"; }
+			if (sender == rgstr_txtb_password) { txt_req.Text = "- Legyen egyedi\n\n- Maximum 20 karakterből álljon\n\n- Ne legyen benne speciális karakter ( )<>#&@{{}<łŁ€$ß\\|Ä )\n\n"; }
+			if (sender == rgstr_cb_megyek) { txt_req.Text = "- Válasszon ki egy megyét a 19 lehetőség közül!"; }
 		}
 
-		private void rgstr_txtb_username_selected(object sender, RoutedEventArgs e)
-		{
-			txt_req.Foreground = Brushes.Black;
-			txt_req.Text = "- Legyen egyedi\n\n- Maximum 20 karakterből álljon\n\n- Ne legyen benne speciális karakter ( )<>#&@{{}<łŁ€$ß\\|Ä )\n\n";
-			// - Legyen egyedi
-		}
-        private void rgstr_cb_megyek_selected(object sender, RoutedEventArgs e)
-        {
-			txt_req.Foreground = Brushes.Black;
-			txt_req.Text = "- Válasszon ki egy megyét a 19 lehetőség közül!";
-        }
-		#endregion
 		private void Button_Click_1(object sender, RoutedEventArgs e)
 		{
             try

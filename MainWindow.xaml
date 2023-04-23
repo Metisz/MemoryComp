@@ -30,21 +30,21 @@
                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
                         <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
                             <Label VerticalContentAlignment="Center" Content="Felhasználónév" Margin="35,20,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                            <TextBox x:Name="rgstr_txtb_username" Margin="35,0,35,10" Height="30" Text="" GotFocus="rgstr_txtb_username_selected" VerticalContentAlignment="Center" FontSize="14"/>
+                            <TextBox x:Name="rgstr_txtb_username" Margin="35,0,35,10" Height="30" Text="" GotFocus="rgstr_object_selected" VerticalContentAlignment="Center" FontSize="14"/>
                             <Label VerticalContentAlignment="Center" Content="Jelszó" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                            <TextBox x:Name="rgstr_txtb_password" Margin="35,0,35,10" Height="30" Text="" GotFocus="rgstr_txtb_password_selected" VerticalContentAlignment="Center" FontSize="14"/>
+                            <TextBox x:Name="rgstr_txtb_password" Margin="35,0,35,10" Height="30" Text="" GotFocus="rgstr_object_selected" VerticalContentAlignment="Center" FontSize="14"/>
                             <Label VerticalContentAlignment="Center" Content="Megye" Margin="35,0,35,0" Padding="0,5,5,5" FontFamily="Yu Gothic UI Semibold"/>
-                            <ComboBox x:Name="rgstr_cb_megyek" Margin="35,0,35,0" Loaded="rgstr_cb_megyek_loaded" GotFocus="rgstr_cb_megyek_selected"/>
-                            <Button x:Name="rgstr_btn_register" Content="Regisztrálás" Height="30" Margin="70,20,70,0" Click="Button_Click"/>
+                            <ComboBox x:Name="rgstr_cb_megyek" Margin="35,0,35,0" Loaded="rgstr_cb_megyek_loaded" GotFocus="rgstr_object_selected"/>
+                            <Button x:Name="rgstr_btn_register" Content="Regisztrálás" Height="30" Margin="70,20,70,0" Click="Register_Click"/>
                         </StackPanel>
 
                     </Border>
                     <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1">
                         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <Label Content="Követelmények:" FontFamily="Yu Gothic UI Semibold" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,20,0,0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontSize="17"/>
-                            <TextBlock x:Name="txt_req" Height="220"  TextWrapping="Wrap" Padding="25,10,20,0" ScrollViewer.CanContentScroll="True">
+                            <TextBlock x:Name="txt_req" Height="220"  TextWrapping="Wrap" Padding="25,10,20,0" ScrollViewer.CanContentScroll="True"/>
 
-                            </TextBlock>
+
                         </StackPanel>
 
 
