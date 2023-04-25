@@ -18,9 +18,9 @@ using System.Windows.Shapes;
 namespace MemoryComp
 {
 	/// <summary>
-	/// Interaction logic for Jatek.xaml
+	/// Interaction logic for Csimpanz.xaml
 	/// </summary>
-	public partial class Jatek : Window
+	public partial class Csimpanz : Window
 	{
 		int jatekid = 1;
 		MySqlConnection connect = new MySqlConnection(
@@ -44,11 +44,11 @@ namespace MemoryComp
 		}
 
 		public void Lose()
-    {
+		{
 			Grid.Children.Clear();
 			lbl_points_earned.Content = $"{Pont}";
-      if (HasAccount)
-      {
+			if (HasAccount)
+			{
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				using (MySqlCommand HasScore = new MySqlCommand($"SELECT felhid, rekordpont FROM pontok WHERE felhid = {ActiveAccount.Userid} AND jatekid = {jatekid};", connect))
 				{
@@ -57,14 +57,14 @@ namespace MemoryComp
 						if (reader.HasRows)
 						{
 							reader.Read();
-                            if (Pont > reader.GetInt32(1))
-                            {
+							if (Pont > reader.GetInt32(1))
+							{
 								lbl_newrecord.Visibility = Visibility.Visible;
 								connect.Close(); connect.Open();
 								MySqlCommand RegisterCMD = new MySqlCommand($"UPDATE pontok SET rekordpont = {Pont} WHERE felhid = {ActiveAccount.Userid} AND jatekid = {jatekid};", connect);
 								RegisterCMD.CommandType = CommandType.Text;
 								RegisterCMD.ExecuteNonQuery();
-                            }
+							}
 						}
 						else
 						{
@@ -73,13 +73,13 @@ namespace MemoryComp
 							MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO pontok (felhid, jatekid ,rekordpont) VALUES ({ActiveAccount.Userid},{jatekid},{Pont});", connect);
 							RegisterCMD.CommandType = CommandType.Text;
 							RegisterCMD.ExecuteNonQuery();
-              connect.Close();
+							connect.Close();
 							MessageBox.Show("jej");
 						}
 					}
 				}
 				connect.Close();
-      }
+			}
 			gbox_lose.Visibility = Visibility.Visible;
 		}
 
@@ -109,7 +109,7 @@ namespace MemoryComp
 		}
 
 
-		public Jatek(Account ActiveAccount)
+		public Csimpanz(Account ActiveAccount)
 		{ 
 			InitializeComponent();
 			if (ActiveAccount == null) { HasAccount = false; }

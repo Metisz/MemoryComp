@@ -76,7 +76,7 @@ namespace MemoryComp
 
 		private void btn_chimp_Start(object sender, RoutedEventArgs e)
 		{
-			Jatek Chimp_Test = new Jatek(ActiveAccount);
+			Csimpanz Chimp_Test = new Csimpanz(ActiveAccount);
 			this.Close();
 			Chimp_Test.ShowDialog();
 		}
