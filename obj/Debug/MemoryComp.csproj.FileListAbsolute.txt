@@ -77,3 +77,4 @@ C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\App.baml
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.CopyComplete
+C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.AssemblyReference.cache
