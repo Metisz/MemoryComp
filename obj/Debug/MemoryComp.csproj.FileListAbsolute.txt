@@ -18,7 +18,6 @@ C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.pdb
 C:\Users\mmart\source\repos\MemoryComp\bin\Debug\MemoryComp.exe.config
 C:\Users\mmart\source\repos\MemoryComp\bin\Debug\MemoryComp.exe
 C:\Users\mmart\source\repos\MemoryComp\bin\Debug\MemoryComp.pdb
-C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.AssemblyReference.cache
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Jatek.g.cs
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MainWindow.g.cs
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\App.g.cs

@@ -22,6 +22,7 @@ namespace MemoryComp
 	/// </summary>
 	public partial class Jatek : Window
 	{
+		int jatekid = 1;
 		MySqlConnection connect = new MySqlConnection(
 			"server = localhost; userid = root; password = ; database = MemoryComp"
 			);
@@ -49,23 +50,27 @@ namespace MemoryComp
       if (HasAccount)
       {
 				if (connect.State == ConnectionState.Closed) connect.Open();
-				using (MySqlCommand HasScore = new MySqlCommand($"SELECT felhid FROM csimpanz where felhid = {ActiveAccount.Userid};", connect))
+				using (MySqlCommand HasScore = new MySqlCommand($"SELECT felhid, rekordpont FROM pontok WHERE felhid = {ActiveAccount.Userid} AND jatekid = {jatekid};", connect))
 				{
 					using (MySqlDataReader reader = HasScore.ExecuteReader())
 					{
 						if (reader.HasRows)
 						{
-							connect.Close(); connect.Open();
-							lbl_newrecord.Visibility = Visibility.Hidden;
-							MySqlCommand RegisterCMD = new MySqlCommand($"UPDATE csimpanz SET rekordpont = {Pont} WHERE felhid = {ActiveAccount.Userid};", connect);
-							RegisterCMD.CommandType = CommandType.Text;
-							RegisterCMD.ExecuteNonQuery();
+							reader.Read();
+                            if (Pont > reader.GetInt32(1))
+                            {
+								lbl_newrecord.Visibility = Visibility.Visible;
+								connect.Close(); connect.Open();
+								MySqlCommand RegisterCMD = new MySqlCommand($"UPDATE pontok SET rekordpont = {Pont} WHERE felhid = {ActiveAccount.Userid} AND jatekid = {jatekid};", connect);
+								RegisterCMD.CommandType = CommandType.Text;
+								RegisterCMD.ExecuteNonQuery();
+                            }
 						}
 						else
 						{
 							connect.Close(); connect.Open();
 							lbl_newrecord.Visibility = Visibility.Visible;
-							MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO csimpanz (felhid, rekordpont) VALUES ({ActiveAccount.Userid},{Pont});", connect);
+							MySqlCommand RegisterCMD = new MySqlCommand($"INSERT INTO pontok (felhid, jatekid ,rekordpont) VALUES ({ActiveAccount.Userid},{jatekid},{Pont});", connect);
 							RegisterCMD.CommandType = CommandType.Text;
 							RegisterCMD.ExecuteNonQuery();
               connect.Close();
@@ -148,6 +153,7 @@ namespace MemoryComp
 
 		private void btn_restart_Click(object sender, RoutedEventArgs e)
 		{
+			lbl_newrecord.Visibility = Visibility.Hidden;
 			gbox_lose.Visibility = Visibility.Hidden;
 			Pont = 0;
 			AddButton(pont + 1);
