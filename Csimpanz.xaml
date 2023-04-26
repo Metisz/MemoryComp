@@ -1,0 +1,23 @@
+﻿<Window x:Class="MemoryComp.Csimpanz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MemoryComp"
+        mc:Ignorable="d"
+        Title="Jatek" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <StackPanel x:Name="stckpnl_lose" HorizontalAlignment="Center" VerticalAlignment="Center" Height="325" Margin="0,0,0,0" Width="485">
+            <Label Content="Vége" HorizontalAlignment="Stretch" FontSize="72" HorizontalContentAlignment="Center" Style="{StaticResource Gunplay}" VerticalContentAlignment="Center" Foreground="#FFD10000"/>
+            <Label Content="Elért pontszámod:" HorizontalAlignment="Stretch" VerticalAlignment="Top" Style="{StaticResource KarmaFuture}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label x:Name="lbl_points_earned" Content="0" HorizontalAlignment="Stretch" Style="{StaticResource KarmaFuture}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label x:Name="lbl_newrecord" Visibility="Hidden" Content="Új Rekord!!!" FontSize="22" HorizontalContentAlignment="Center" Foreground="#FFE0C046" Background="#00000000" FontFamily="Berlin Sans FB Demi"/>
+            <Button x:Name="btn_restart" Content="Újra" Height="40" Margin="150,0,150,0" Click="btn_restart_Click"/>
+            <Button x:Name="btn_QUIT" Content="Kilépés" Height="40" Margin="150,14,150,0" Click="btn_quit_Click"/>
+        </StackPanel>
+        <Grid x:Name="Grid">
+            
+        </Grid>
+
+    </Grid>
+</Window>

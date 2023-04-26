@@ -74,11 +74,20 @@ namespace MemoryComp
 		//------------------------------------------------------------------------------------------------------
 		#endregion
 
-		private void btn_chimp_Start(object sender, RoutedEventArgs e)
+		private void btn_game_Start(object sender, RoutedEventArgs e)
 		{
-			Csimpanz Chimp_Test = new Csimpanz(ActiveAccount);
-			this.Close();
-			Chimp_Test.ShowDialog();
+			if (sender == btn_chimp)
+			{
+				Csimpanz Chimp_Test = new Csimpanz(ActiveAccount);
+				this.Close();
+				Chimp_Test.ShowDialog();
+			}
+			if (sender == btn_number)
+			{
+				Szammemoria Number_Memory = new Szammemoria(ActiveAccount);
+				this.Close();
+				Number_Memory.ShowDialog();
+			}
 		}
 
 		private void Register_Click(object sender, RoutedEventArgs e)

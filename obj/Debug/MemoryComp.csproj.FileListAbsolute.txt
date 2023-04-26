@@ -6,9 +6,7 @@ C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp_MarkupCompile.lref
 C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MemoryComp.exe.config
 C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MemoryComp.exe
 C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MemoryComp.pdb
-C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Jatek.g.cs
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MainWindow.baml
-C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Jatek.baml
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.g.resources
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.Properties.Resources.resources
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.GenerateResource.cache
@@ -78,3 +76,13 @@ C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Runtime.CompilerServic
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\App.baml
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.CopyComplete
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.AssemblyReference.cache
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MySqlConnector.dll
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MySqlConnector.xml
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Csimpanz.g.cs
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Csimpanz.baml
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Szammemoria.g.cs
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Szammemoria.baml
