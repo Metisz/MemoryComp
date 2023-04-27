@@ -16,12 +16,10 @@ C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.pdb
 C:\Users\mmart\source\repos\MemoryComp\bin\Debug\MemoryComp.exe.config
 C:\Users\mmart\source\repos\MemoryComp\bin\Debug\MemoryComp.exe
 C:\Users\mmart\source\repos\MemoryComp\bin\Debug\MemoryComp.pdb
-C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Jatek.g.cs
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MainWindow.g.cs
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\App.g.cs
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp_MarkupCompile.cache
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp_MarkupCompile.lref
-C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Jatek.baml
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MainWindow.baml
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.g.resources
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.Properties.Resources.resources
@@ -86,3 +84,13 @@ C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Csimpanz.g.cs
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Csimpanz.baml
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Szammemoria.g.cs
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Szammemoria.baml
+C:\Users\mmart\source\repos\MemoryComp\bin\Debug\MySqlConnector.dll
+C:\Users\mmart\source\repos\MemoryComp\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\mmart\source\repos\MemoryComp\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\mmart\source\repos\MemoryComp\bin\Debug\MySqlConnector.xml
+C:\Users\mmart\source\repos\MemoryComp\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\mmart\source\repos\MemoryComp\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Csimpanz.g.cs
+C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Szammemoria.g.cs
+C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Csimpanz.baml
+C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Szammemoria.baml
