@@ -1,18 +1,27 @@
-﻿using System;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Data;
-using System.Windows.Threading;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MemoryComp
 {
 	/// <summary>
-	/// Interaction logic for Szammemoria.xaml
+	/// Interaction logic for Szekvencia.xaml
 	/// </summary>
-	public partial class Szammemoria : Window
+	public partial class Szekvencia : Window
 	{
-		int jatekid = 2;
+		int jatekid = 3;
 		MySqlConnection connect = new MySqlConnection(
 			"server = localhost; userid = root; password = ; database = MemoryComp"
 			);
@@ -32,8 +41,8 @@ namespace MemoryComp
 				pont = Convert.ToInt32(value);
 			}
 		}
-		
-		public Szammemoria(Account ActiveAccount)
+
+		public Szekvencia(Account ActiveAccount)
 		{
 			InitializeComponent();
 			if (ActiveAccount == null) { HasAccount = false; }
@@ -49,33 +58,7 @@ namespace MemoryComp
 		}
 		private void Dt_Tick(object sender, EventArgs e)
 		{
-			if (prgrss_timer.Value != 0) prgrss_timer.Value -= 1;
-			else
-			{
-				timer.Stop();
-				vwbx_Number.Visibility = Visibility.Collapsed;
-				txtb_answer.IsEnabled = true;
-				txtb_answer.Visibility = Visibility.Visible;
-				txtb_answer.Focus();
-				prgrss_timer.Visibility = Visibility.Hidden;
-			}
-		}
-
-		public void NewNumber(int pont, bool newgame)
-		{
-			NumGame.Visibility = Visibility.Visible;
-			if (newgame) timer.Interval = TimeSpan.FromMilliseconds(15);
-			Number.Text = "";
-			for (int i = 0; i < pont+1; i++)
-			{
-				Number.Text += rnd.Next(0, 10).ToString();
-			}
-			vwbx_Number.Visibility = Visibility.Visible;
-			txtb_answer.IsEnabled = false;
-			txtb_answer.Visibility = Visibility.Collapsed;
-			prgrss_timer.Visibility = Visibility.Visible;
-			prgrss_timer.Value = prgrss_timer.Maximum;
-			timer.Start();
+			
 		}
 
 		public void Lose()
@@ -118,7 +101,7 @@ namespace MemoryComp
 			stckpnl_lose.Visibility = Visibility.Visible;
 		}
 
-		
+
 
 		private void btn_restart_Click(object sender, RoutedEventArgs e)
 		{
@@ -148,7 +131,7 @@ namespace MemoryComp
 				else Lose();
 				txtb_answer.Text = "";
 			}
-			
+
 		}
 	}
 }
