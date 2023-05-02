@@ -94,3 +94,5 @@ C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Csimpanz.g.cs
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Szammemoria.g.cs
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Csimpanz.baml
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Szammemoria.baml
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Reakcio.g.cs
+C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Reakcio.baml

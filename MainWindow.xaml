@@ -77,7 +77,7 @@
                     <ListBox HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="500" Height="235">
                         <Button x:Name="btn_chimp" Content="Csimpánz Teszt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_game_Start"/>
                         <Button x:Name="btn_number" Content="Számmemória" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_game_Start"/>
-                        <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_game_Start"/>
+                        <Button x:Name="btn_reaction" Content="Reakcióidő" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_game_Start"/>
                         <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_game_Start"/>
                         <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_game_Start"/>
                         <Button Content="Csimpánzjáték" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" Height="45" FontFamily="Microsoft Sans Serif" FontSize="18" Click="btn_game_Start"/>

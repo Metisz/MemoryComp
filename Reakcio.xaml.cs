@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +18,11 @@ using System.Windows.Threading;
 namespace MemoryComp
 {
 	/// <summary>
-	/// Interaction logic for Szekvencia.xaml
+	/// Interaction logic for Reakcio.xaml
 	/// </summary>
-	public partial class Szekvencia : Window
+	public partial class Reakcio : Window
 	{
-		int jatekid = 3;
+		int jatekid = 2;
 		MySqlConnection connect = new MySqlConnection(
 			"server = localhost; userid = root; password = ; database = MemoryComp"
 			);
@@ -29,7 +30,8 @@ namespace MemoryComp
 		private Account ActiveAccount;
 		public Random rnd = new Random();
 		private int pont = 0;
-		private DispatcherTimer timer;
+		private DispatcherTimer timer_cooldown;
+		DateTime FigyelKezd; TimeSpan Kulonbseg;
 		public int Pont
 		{
 			get
@@ -42,7 +44,7 @@ namespace MemoryComp
 			}
 		}
 
-		public Szekvencia(Account ActiveAccount)
+		public Reakcio(Account ActiveAccount)
 		{
 			InitializeComponent();
 			if (ActiveAccount == null) { HasAccount = false; }
@@ -52,13 +54,23 @@ namespace MemoryComp
 				this.ActiveAccount = ActiveAccount;
 			}
 			stckpnl_lose.Visibility = Visibility.Hidden;
-			timer = new DispatcherTimer();
-			timer.Tick += Dt_Tick;
-			NewNumber(Pont, true);
+			timer_cooldown = new DispatcherTimer();
+			timer_cooldown.Tick += Dt_Tick;
+			Start();
 		}
 		private void Dt_Tick(object sender, EventArgs e)
 		{
-			
+			btn_game.Background = Brushes.Green;
+			btn_game.Content = "Katt!";
+			timer_cooldown.Stop();
+			FigyelKezd = DateTime.Now;
+		}
+
+		public void Start()
+		{
+			timer_cooldown.Interval = TimeSpan.FromMilliseconds(rnd.Next(1000,10000));
+			btn_game.Content = "Várj...";
+			timer_cooldown.Start();
 		}
 
 		public void Lose()
@@ -74,7 +86,7 @@ namespace MemoryComp
 						if (reader.HasRows)
 						{
 							reader.Read();
-							if (Pont > reader.GetInt32(1))
+							if (Pont < reader.GetInt32(1))
 							{
 								lbl_newrecord.Visibility = Visibility.Visible;
 								connect.Close(); connect.Open();
@@ -91,13 +103,12 @@ namespace MemoryComp
 							RegisterCMD.CommandType = CommandType.Text;
 							RegisterCMD.ExecuteNonQuery();
 							connect.Close();
-							MessageBox.Show("jej");
 						}
 					}
 				}
 				connect.Close();
 			}
-			NumGame.Visibility = Visibility.Hidden;
+			btn_game.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Visible;
 		}
 
@@ -107,8 +118,11 @@ namespace MemoryComp
 		{
 			lbl_newrecord.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Hidden;
+			btn_game.Background = new SolidColorBrush(Color.FromRgb(211, 211, 211));
+			btn_game.Visibility = Visibility.Visible;
 			Pont = 0;
-			NewNumber(pont, true);
+
+			Start();
 		}
 
 		private void btn_quit_Click(object sender, RoutedEventArgs e)
@@ -118,20 +132,11 @@ namespace MemoryComp
 			Menu.ShowDialog();
 		}
 
-		private void PressedEnter(object sender, System.Windows.Input.KeyEventArgs e)
+		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			if (e.Key == Key.Enter)
-			{
-				if (txtb_answer.Text == Number.Text)
-				{
-					++Pont;
-					timer.Interval = TimeSpan.FromMilliseconds(15 + Pont * 2);
-					NewNumber(Pont, false);
-				}
-				else Lose();
-				txtb_answer.Text = "";
-			}
-
+			Kulonbseg = DateTime.Now - FigyelKezd;
+			Pont = Convert.ToInt32(Kulonbseg.TotalMilliseconds);
+			Lose();
 		}
 	}
 }

@@ -77,6 +77,12 @@ namespace MemoryComp
 				this.Close();
 				Number_Memory.ShowDialog();
 			}
+			if (sender == btn_reaction)
+			{
+				Reakcio Reaction_Time = new Reakcio(ActiveAccount);
+				this.Close();
+				Reaction_Time.ShowDialog();
+			}
 		}
 
 		private void Register_Click(object sender, RoutedEventArgs e)
