@@ -40,6 +40,7 @@ namespace MemoryComp
 			lbl_points_earned.Content = $"{Pont}";
 			if (HasAccount)
 			{
+				// btn_leaderboard.IsEnabled = false;
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				using (MySqlCommand HasScore = new MySqlCommand($"SELECT felhid, rekordpont FROM pontok WHERE felhid = {ActiveAccount.Userid} AND jatekid = {jatekid};", connect))
 				{
@@ -109,8 +110,8 @@ namespace MemoryComp
 				this.ActiveAccount = ActiveAccount;	
             }
 			DataContext = this;
-			stckpnl_lose.Visibility = Visibility.Hidden;
-			AddButton(pont+1);
+			//stckpnl_lose.Visibility = Visibility.Hidden;
+			//AddButton(pont+1);
 		}
 
 
@@ -157,5 +158,38 @@ namespace MemoryComp
 			Menu.ShowDialog();
 		}
 
-	}
+        private void btn_leaderboard_load(object sender, RoutedEventArgs e)
+        {
+            stckpnl_lose.Visibility = Visibility.Hidden;
+
+			if (connect.State == ConnectionState.Closed) connect.Open();
+			try
+			{
+				MySqlCommand cmd = new MySqlCommand("Select accounts.felhnev as 'Nevek', pontok.rekordpont as 'Pontok' from " +
+					"megyek INNER JOIN (accounts INNER JOIN (pontok INNER JOIN jatekok ON pontok.jatekid = jatekok.id) ON accounts.id = pontok.felhid) ON megyek.id = accounts.megyeid " +
+					$"WHERE jatekid = '{jatekid}' AND megyeid = '{ActiveAccount.Megyeid}';", connect);
+				MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+				DataSet ds = new DataSet();
+				adp.Fill(ds, "LoadDataBinding");
+				dtgrd_players.DataContext = ds;
+			}
+			catch (MySqlException ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+			finally {
+				connect.Close();
+			}
+			connect.Close();
+
+			stckpnl_leaderboard.Visibility = Visibility.Visible;
+
+        }
+
+        private void backtolose(object sender, RoutedEventArgs e)
+        {
+			stckpnl_leaderboard.Visibility = Visibility.Hidden;
+			stckpnl_lose.Visibility = Visibility.Visible;
+		}
+    }
 }

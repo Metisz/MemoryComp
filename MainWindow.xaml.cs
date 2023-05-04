@@ -207,14 +207,14 @@ namespace MemoryComp
     private void lgn_btn_login_Click(object sender, RoutedEventArgs e)
     {
 			if (connect.State == ConnectionState.Closed) connect.Open();
-			using (MySqlCommand LoginAttempt = new MySqlCommand($"SELECT id, felhnev FROM accounts WHERE felhnev = '{lgn_txtb_username.Text}' AND jelszo = '{lgn_txtb_password.Text}';", connect))
+			using (MySqlCommand LoginAttempt = new MySqlCommand($"SELECT id, felhnev, megyeid FROM accounts WHERE felhnev = '{lgn_txtb_username.Text}' AND jelszo = '{lgn_txtb_password.Text}';", connect))
 			{
 				using (MySqlDataReader reader = LoginAttempt.ExecuteReader())
 				{
 					if (reader.HasRows)
 					{
 						reader.Read();
-						ActiveAccount = new Account(reader.GetInt32(0), reader.GetString(1));
+						ActiveAccount = new Account(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
 						TabItems(false, false, true);
 						tabctrl_menus.SelectedItem = tabitem_games;
 					}

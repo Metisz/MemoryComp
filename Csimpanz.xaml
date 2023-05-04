@@ -7,13 +7,25 @@
         mc:Ignorable="d"
         Title="Jatek" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
-        <StackPanel x:Name="stckpnl_lose" HorizontalAlignment="Center" VerticalAlignment="Center" Height="325" Margin="0,0,0,0" Width="485">
+        <StackPanel x:Name="stckpnl_lose" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="485" Height="270" Visibility="Hidden">
             <Label Content="Vége" HorizontalAlignment="Stretch" FontSize="72" HorizontalContentAlignment="Center" Style="{StaticResource Gunplay}" VerticalContentAlignment="Center" Foreground="#FFD10000"/>
             <Label Content="Elért pontszámod:" HorizontalAlignment="Stretch" VerticalAlignment="Top" Style="{StaticResource KarmaFuture}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <Label x:Name="lbl_points_earned" Content="0" HorizontalAlignment="Stretch" Style="{StaticResource KarmaFuture}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <Label x:Name="lbl_newrecord" Visibility="Hidden" Content="Új Rekord!!!" FontSize="22" HorizontalContentAlignment="Center" Foreground="#FFE0C046" Background="#00000000" FontFamily="Berlin Sans FB Demi"/>
-            <Button x:Name="btn_restart" Content="Újra" Height="40" Margin="150,0,150,0" Click="btn_restart_Click"/>
-            <Button x:Name="btn_QUIT" Content="Kilépés" Height="40" Margin="150,14,150,0" Click="btn_quit_Click"/>
+            <StackPanel Orientation="Horizontal" Height="50">
+                <Button x:Name="btn_restart" Content="Újra" Width="150" Margin="100,0,0,0" Click="btn_restart_Click"/>
+                <Button x:Name="btn_leaderboard" Content="ldrbrd" Height="50" Width="50" Margin="15,0,15,0" Click="btn_leaderboard_load"/>
+                <Button x:Name="btn_QUIT" Content="Kilépés" Height="50" Width="50" Margin="0,0,0,0" Click="btn_quit_Click"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Name="stckpnl_leaderboard" Width="485" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Height="30">
+                <ComboBox Width="150" Margin="62.5,5,60,5"></ComboBox>
+                <ComboBox Width="150" Margin="0,5,0,5"></ComboBox>
+            </StackPanel>
+            <DataGrid x:Name="dtgrd_players" Height="230" ItemsSource="{Binding Path=LoadDataBinding}" IsReadOnly="True"/>
+            <Button x:Name="btn_leaderboard_back" Content="Vissza" Margin="30,10,400,0" Click="backtolose" />
+
         </StackPanel>
         <Grid x:Name="Grid">
             

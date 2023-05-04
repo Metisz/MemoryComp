@@ -73,7 +73,6 @@ C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\App.baml
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.CopyComplete
-C:\Users\mmart\source\repos\MemoryComp\obj\Debug\MemoryComp.csproj.AssemblyReference.cache
 C:\Users\Márton\source\repos\MemoryComp\bin\Debug\MySqlConnector.dll
 C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Márton\source\repos\MemoryComp\bin\Debug\System.Threading.Tasks.Extensions.dll
@@ -96,3 +95,5 @@ C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Csimpanz.baml
 C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Szammemoria.baml
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Reakcio.g.cs
 C:\Users\Márton\source\repos\MemoryComp\obj\Debug\Reakcio.baml
+C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Reakcio.g.cs
+C:\Users\mmart\source\repos\MemoryComp\obj\Debug\Reakcio.baml

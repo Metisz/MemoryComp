@@ -10,12 +10,15 @@ namespace MemoryComp
     {
         private int userid;
         private string username;
-        public Account(int id, string uname)
+        private int megyeid;
+        public Account(int id, string uname, int megye)
         {
             userid = id;
             Username = uname;
+            Megyeid = megye;
         }
         public int Userid { get => userid; private set => userid = value; }
         public string Username { get => username; private set => username = value; }
+        public int Megyeid { get => megyeid; private set => megyeid = value; }
     }
 }
