@@ -19,11 +19,8 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Name="stckpnl_leaderboard" Width="485" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal" Height="30">
-                <ComboBox Width="150" Margin="62.5,5,60,5"></ComboBox>
-                <ComboBox Width="150" Margin="0,5,0,5"></ComboBox>
-            </StackPanel>
-            <DataGrid x:Name="dtgrd_players" Height="230" ItemsSource="{Binding Path=LoadDataBinding}" IsReadOnly="True"/>
+            <ComboBox x:Name="cb_megyek" Width="150" Margin="0,5,0,5" SelectionChanged="MegyeChanged" />
+            <DataGrid x:Name="dtgrd_players" Height="230" ItemsSource="{Binding Path=LoadDataBinding}" IsReadOnly="True" ColumnWidth="242.5"/>
             <Button x:Name="btn_leaderboard_back" Content="Vissza" Margin="30,10,400,0" Click="backtolose" />
 
         </StackPanel>

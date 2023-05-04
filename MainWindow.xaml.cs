@@ -25,10 +25,21 @@ namespace MemoryComp
 		{
 			InitializeComponent();
 			TabItems(false, false, false);
-			string[] Megyek = new string[19] { "Bács-Kiskun", "Baranya", "Békés", "Borsod-Abaúj-Zemplén", "Csongrád-Csanád", "Fejér", "Győr-Moson-Sopron", "Hajdú-Bihar", "Heves", "Jász-Nagykun-Szolnok", "Komárom-Esztergom", "Nógrád", "Pest", "Somogy", "Szabolcs-Szatmár-Bereg", "Tolna", "Vas", "Veszprém", "Zala" };
+			//string[] Megyek = new string[19] { "Bács-Kiskun", "Baranya", "Békés", "Borsod-Abaúj-Zemplén", "Csongrád-Csanád", "Fejér", "Győr-Moson-Sopron", "Hajdú-Bihar", "Heves", "Jász-Nagykun-Szolnok", "Komárom-Esztergom", "Nógrád", "Pest", "Somogy", "Szabolcs-Szatmár-Bereg", "Tolna", "Vas", "Veszprém", "Zala" };
 			MegyeToID = new Dictionary<string, int>();
-			for (int i = 0; i < 19; i++) { MegyeToID.Add(Megyek[i], i + 1); }
-			rgstr_cb_megyek.ItemsSource = Megyek;
+			if (connect.State == ConnectionState.Closed) connect.Open();
+			using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
+			{
+				using (MySqlDataReader reader = GetMegyek.ExecuteReader())
+				{
+                    while (reader.Read())
+                    {
+						MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+					}
+				}
+			}
+			connect.Close();
+			rgstr_cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
 			ControlTemplate ct = rgstr_cb_megyek.Template;	
 		}
 		private void rgstr_cb_megyek_loaded(object sender, RoutedEventArgs e)

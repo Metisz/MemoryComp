@@ -21,6 +21,7 @@ namespace MemoryComp
 		public List<Button> gombok = new List<Button>();
 		private Account ActiveAccount;
 		public Random rnd = new Random();
+		public Dictionary<string, int> MegyeToID;
 		private int pont = 0;
 		public int Pont
 		{
@@ -40,7 +41,7 @@ namespace MemoryComp
 			lbl_points_earned.Content = $"{Pont}";
 			if (HasAccount)
 			{
-				// btn_leaderboard.IsEnabled = false;
+				btn_leaderboard.IsEnabled = true;
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				using (MySqlCommand HasScore = new MySqlCommand($"SELECT felhid, rekordpont FROM pontok WHERE felhid = {ActiveAccount.Userid} AND jatekid = {jatekid};", connect))
 				{
@@ -72,6 +73,7 @@ namespace MemoryComp
 				}
 				connect.Close();
 			}
+			else btn_leaderboard.IsEnabled = false ;
 			stckpnl_lose.Visibility = Visibility.Visible;
 		}
 
@@ -107,11 +109,27 @@ namespace MemoryComp
 			if (ActiveAccount == null) { HasAccount = false; }
             else {
 				HasAccount = true;
-				this.ActiveAccount = ActiveAccount;	
-            }
-			DataContext = this;
-			//stckpnl_lose.Visibility = Visibility.Hidden;
-			//AddButton(pont+1);
+				this.ActiveAccount = ActiveAccount;
+				cb_megyek.SelectedIndex = ActiveAccount.Megyeid - 1;
+			}
+			
+			MegyeToID = new Dictionary<string, int>();
+			if (connect.State == ConnectionState.Closed) connect.Open();
+			using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
+			{
+				using (MySqlDataReader reader = GetMegyek.ExecuteReader())
+				{
+					while (reader.Read())
+					{
+						MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+					}
+				}
+			}
+			connect.Close();
+			cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
+			stckpnl_leaderboard.Visibility = Visibility.Hidden;
+			stckpnl_lose.Visibility = Visibility.Hidden;
+			AddButton(pont+1);
 		}
 
 
@@ -167,7 +185,7 @@ namespace MemoryComp
 			{
 				MySqlCommand cmd = new MySqlCommand("Select accounts.felhnev as 'Nevek', pontok.rekordpont as 'Pontok' from " +
 					"megyek INNER JOIN (accounts INNER JOIN (pontok INNER JOIN jatekok ON pontok.jatekid = jatekok.id) ON accounts.id = pontok.felhid) ON megyek.id = accounts.megyeid " +
-					$"WHERE jatekid = '{jatekid}' AND megyeid = '{ActiveAccount.Megyeid}';", connect);
+					$"WHERE jatekid = '{jatekid}' AND megyeid = '{MegyeToID[cb_megyek.SelectedItem.ToString()]}';", connect);
 				MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
 				DataSet ds = new DataSet();
 				adp.Fill(ds, "LoadDataBinding");
@@ -191,5 +209,10 @@ namespace MemoryComp
 			stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Visible;
 		}
+
+        private void MegyeChanged(object sender, SelectionChangedEventArgs e)
+        {
+			btn_leaderboard_load(sender, e);
+        }
     }
 }

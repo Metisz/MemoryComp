@@ -1,7 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -17,6 +20,7 @@ namespace MemoryComp
 		private Account ActiveAccount;
 		public Random rnd = new Random();
 		private int pont = 0;
+		public Dictionary<string, int> MegyeToID;
 		private DispatcherTimer timer_cooldown;
 		DateTime FigyelKezd; TimeSpan Kulonbseg;
 		public int Pont
@@ -39,7 +43,23 @@ namespace MemoryComp
 			{
 				HasAccount = true;
 				this.ActiveAccount = ActiveAccount;
+				cb_megyek.SelectedIndex = ActiveAccount.Megyeid - 1;
 			}
+			MegyeToID = new Dictionary<string, int>();
+			if (connect.State == ConnectionState.Closed) connect.Open();
+			using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
+			{
+				using (MySqlDataReader reader = GetMegyek.ExecuteReader())
+				{
+					while (reader.Read())
+					{
+						MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+					}
+				}
+			}
+			connect.Close();
+			cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
+			stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Hidden;
 			timer_cooldown = new DispatcherTimer();
 			timer_cooldown.Tick += Dt_Tick;
@@ -65,6 +85,7 @@ namespace MemoryComp
 			lbl_points_earned.Content = $"{Pont}";
 			if (HasAccount)
 			{
+				btn_leaderboard.IsEnabled = false;
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				using (MySqlCommand HasScore = new MySqlCommand($"SELECT felhid, rekordpont FROM pontok WHERE felhid = {ActiveAccount.Userid} AND jatekid = {jatekid};", connect))
 				{
@@ -95,6 +116,7 @@ namespace MemoryComp
 				}
 				connect.Close();
 			}
+			else btn_leaderboard.IsEnabled = false;
 			btn_game.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Visible;
 		}
@@ -121,9 +143,53 @@ namespace MemoryComp
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			Kulonbseg = DateTime.Now - FigyelKezd;
-			Pont = Convert.ToInt32(Kulonbseg.TotalMilliseconds);
-			Lose();
+            if (btn_game.Background == Brushes.Green)
+            {
+				Kulonbseg = DateTime.Now - FigyelKezd;
+				Pont = Convert.ToInt32(Kulonbseg.TotalMilliseconds);
+				Lose();
+            }
+		}
+
+		private void btn_leaderboard_load(object sender, RoutedEventArgs e)
+		{
+			stckpnl_lose.Visibility = Visibility.Hidden;
+
+			if (connect.State == ConnectionState.Closed) connect.Open();
+			try
+			{
+				MySqlCommand cmd = new MySqlCommand("Select accounts.felhnev as 'Nevek', pontok.rekordpont as 'Pontok' from " +
+					"megyek INNER JOIN (accounts INNER JOIN (pontok INNER JOIN jatekok ON pontok.jatekid = jatekok.id) ON accounts.id = pontok.felhid) ON megyek.id = accounts.megyeid " +
+					$"WHERE jatekid = '{jatekid}' AND megyeid = '{MegyeToID[cb_megyek.SelectedItem.ToString()]}';", connect);
+				MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+				DataSet ds = new DataSet();
+				adp.Fill(ds, "LoadDataBinding");
+				dtgrd_players.DataContext = ds;
+			}
+			catch (MySqlException ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+			finally
+			{
+				connect.Close();
+			}
+			connect.Close();
+
+			stckpnl_leaderboard.Visibility = Visibility.Visible;
+
+		}
+
+		private void backtolose(object sender, RoutedEventArgs e)
+		{
+			stckpnl_leaderboard.Visibility = Visibility.Hidden;
+			stckpnl_lose.Visibility = Visibility.Visible;
+		}
+
+		private void MegyeChanged(object sender, SelectionChangedEventArgs e)
+		{
+			btn_leaderboard_load(sender, e);
 		}
 	}
 }
+
