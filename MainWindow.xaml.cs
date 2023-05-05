@@ -26,21 +26,9 @@ namespace MemoryComp
 			InitializeComponent();
 			TabItems(false, false, false);
 			//string[] Megyek = new string[19] { "Bács-Kiskun", "Baranya", "Békés", "Borsod-Abaúj-Zemplén", "Csongrád-Csanád", "Fejér", "Győr-Moson-Sopron", "Hajdú-Bihar", "Heves", "Jász-Nagykun-Szolnok", "Komárom-Esztergom", "Nógrád", "Pest", "Somogy", "Szabolcs-Szatmár-Bereg", "Tolna", "Vas", "Veszprém", "Zala" };
-			MegyeToID = new Dictionary<string, int>();
-			if (connect.State == ConnectionState.Closed) connect.Open();
-			using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
-			{
-				using (MySqlDataReader reader = GetMegyek.ExecuteReader())
-				{
-                    while (reader.Read())
-                    {
-						MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
-					}
-				}
-			}
-			connect.Close();
-			rgstr_cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
-			ControlTemplate ct = rgstr_cb_megyek.Template;	
+			
+			
+			ControlTemplate ct = rgstr_cb_megyek.Template;
 		}
 		private void rgstr_cb_megyek_loaded(object sender, RoutedEventArgs e)
 		{
@@ -66,11 +54,11 @@ namespace MemoryComp
 			return !NameList.Contains(NameInQuestion);
 		}
 		void TabItems(bool rgstr, bool lgn, bool gms)
-        {
+		{
 			tabitem_register.IsEnabled = rgstr;
 			tabitem_login.IsEnabled = lgn;
 			tabitem_games.IsEnabled = gms;
-        }
+		}
 		//------------------------------------------------------------------------------------------------------
 		#endregion
 
@@ -98,7 +86,7 @@ namespace MemoryComp
 
 		private void Register_Click(object sender, RoutedEventArgs e)
 		{
-			bool[] UsernameReqs = new bool[4] { false ,false, false, true }; //1. A Név egyedi-e| 2. Textbox üres-e | 3. Maximum 20 karakter | 4. Speciális karakterek			
+			bool[] UsernameReqs = new bool[4] { false, false, false, true }; //1. A Név egyedi-e| 2. Textbox üres-e | 3. Maximum 20 karakter | 4. Speciális karakterek			
 			UsernameReqs[0] = IsNameUnique(rgstr_txtb_username.Text);
 			if (rgstr_txtb_username.Text != null) { UsernameReqs[1] = true; }
 			if (rgstr_txtb_username.Text.Length <= 20) { UsernameReqs[2] = true; }
@@ -145,47 +133,41 @@ namespace MemoryComp
 				MessageBox.Show(hibatext, "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
 
 			}
-            //grd_lar_2.Width = new System.Windows.GridLength(0);
-            //grd_lar.Width = 277.7;
-            //btn_lar.Content = "Bejelentkezés";
-    }
+			//grd_lar_2.Width = new System.Windows.GridLength(0);
+			//grd_lar.Width = 277.7;
+			//btn_lar.Content = "Bejelentkezés";
+		}
 
-        
 
-    //Követelmények
-    private void rgstr_object_selected(object sender, RoutedEventArgs e)
+
+		//Követelmények
+		private void rgstr_object_selected(object sender, RoutedEventArgs e)
 		{
 			if (sender == rgstr_txtb_username) { txt_req.Text = "- Minimum 8 karakterből álljon\n\n- Legyen benne kis- és nagybetű\n\n- Legyen benne szám"; }
 			if (sender == rgstr_txtb_password) { txt_req.Text = "- Legyen egyedi\n\n- Maximum 20 karakterből álljon\n\n- Ne legyen benne speciális karakter ( )<>#&@{{}<łŁ€$ß\\|Ä )\n\n"; }
 			if (sender == rgstr_cb_megyek) { txt_req.Text = "- Válasszon ki egy megyét a 19 lehetőség közül!"; }
 		}
 
-		private void Button_Click_1(object sender, RoutedEventArgs e)
-		{
-      try
-      {
-				if (connect.State == ConnectionState.Closed) connect.Open();
-				csatlakoz_teszt.Text = "Csatlakozott!";
-        try
-        {
-					test_activeacc.Content = ActiveAccount.Username;
-				}
-        catch (Exception)
-        {
-					test_activeacc.Content = "nope";
-				}
-				connect.Close();
-			}
-      catch (Exception ex)
-      {
-				MessageBox.Show(ex.Message);
-      }
-		}
+
 
 		private void MMenuButtonClick(object sender, RoutedEventArgs e)
 		{
 			if (sender == mmenu_account)
 			{
+				MegyeToID = new Dictionary<string, int>();
+				if (connect.State == ConnectionState.Closed) connect.Open();
+				using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
+				{
+					using (MySqlDataReader reader = GetMegyek.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+						}
+					}
+				}
+				connect.Close();
+				rgstr_cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
 				main_menu.Visibility = Visibility.Hidden;
 				tabctrl_menus.Visibility = Visibility.Visible;
 				TabItems(true, true, false);
@@ -202,7 +184,7 @@ namespace MemoryComp
 			{
 				if (MessageBox.Show("Biztos ki szeretne lépni?", "", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
 				{
-					this.Close();
+					Application.Current.Shutdown();
 				}
 			}
 		}
@@ -215,8 +197,8 @@ namespace MemoryComp
 			tabctrl_menus.Visibility = Visibility.Hidden;
 		}
 
-    private void lgn_btn_login_Click(object sender, RoutedEventArgs e)
-    {
+		private void lgn_btn_login_Click(object sender, RoutedEventArgs e)
+		{
 			if (connect.State == ConnectionState.Closed) connect.Open();
 			using (MySqlCommand LoginAttempt = new MySqlCommand($"SELECT id, felhnev, megyeid FROM accounts WHERE felhnev = '{lgn_txtb_username.Text}' AND jelszo = '{lgn_txtb_password.Text}';", connect))
 			{
@@ -237,5 +219,5 @@ namespace MemoryComp
 			}
 			connect.Close();
 		}
-    }
+	}
 }

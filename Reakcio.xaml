@@ -5,44 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryComp"
         mc:Ignorable="d"
-        Title="Reakcio" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <StackPanel x:Name="stckpnl_lose" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="485" Height="270" Visibility="Hidden">
-            <Label Content="Vége" HorizontalAlignment="Stretch" FontSize="72" HorizontalContentAlignment="Center" Style="{StaticResource Gunplay}" VerticalContentAlignment="Center" Foreground="#FFD10000"/>
-            <Label Content="Elért pontszámod:" HorizontalAlignment="Stretch" VerticalAlignment="Top" Style="{StaticResource KarmaFuture}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <Label x:Name="lbl_points_earned" Content="0" HorizontalAlignment="Stretch" Style="{StaticResource KarmaFuture}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <Label x:Name="lbl_newrecord" Visibility="Hidden" Content="Új Rekord!!!" FontSize="22" HorizontalContentAlignment="Center" Foreground="#FFE0C046" Background="#00000000" FontFamily="Berlin Sans FB Demi"/>
-            <StackPanel Orientation="Horizontal" Height="50">
-                <Button x:Name="btn_restart" Content="Újra" Width="150" Margin="100,0,0,0" Click="btn_restart_Click"/>
-                <Button x:Name="btn_leaderboard" Content="ldrbrd" Height="50" Width="50" Margin="15,0,15,0" Click="btn_leaderboard_load"/>
-                <Button x:Name="btn_QUIT" Content="Kilépés" Height="50" Width="50" Margin="0,0,0,0" Click="btn_quit_Click"/>
-            </StackPanel>
-        </StackPanel>
-        <Button x:Name="btn_game" Click="Button_Click" Content="Várj">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FFDDDDDD"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        <StackPanel Name="stckpnl_leaderboard" Width="485" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ComboBox x:Name="cb_megyek" Width="150" Margin="0,5,0,5" SelectionChanged="MegyeChanged" />
-            <DataGrid x:Name="dtgrd_players" Height="230" ItemsSource="{Binding Path=LoadDataBinding}" IsReadOnly="True" ColumnWidth="242.5"/>
-            <Button x:Name="btn_leaderboard_back" Content="Vissza" Margin="30,10,400,0" Click="backtolose" />
+        Title="Reakcio" Height="600" Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Border CornerRadius="53">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/pexels-gdtography-911738.jpg" Stretch="Fill"/>
+        </Border.Background>
 
-        </StackPanel>
-    </Grid>
+        <Border CornerRadius="50" BorderThickness="5" Opacity="0.95">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#19376D" Offset="0"/>
+                    <GradientStop Color="#576CBC" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#6C9BCF" Offset="0"/>
+                    <GradientStop Color="#A5C0DD" Offset="0.7"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <StackPanel x:Name="stckpnl_lose" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="485" Height="270" Visibility="Hidden">
+                    <Label Content="Vége" HorizontalAlignment="Stretch" FontSize="72" HorizontalContentAlignment="Center" FontFamily="/CustomFonts/#Gunplay" VerticalContentAlignment="Center" Foreground="White"/>
+                    <Label Content="Elért pontszámod:" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="/CustomFonts/#Karma Future" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+                    <Label x:Name="lbl_points_earned" Content="0" HorizontalAlignment="Stretch" FontFamily="/CustomFonts/#Karma Suture" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="Red"/>
+                    <Label x:Name="lbl_newrecord" Visibility="Hidden" Content="Új Rekord!!!" FontSize="22" HorizontalContentAlignment="Center" Foreground="#284975" Background="#00000000" FontFamily="Berlin Sans FB Demi"/>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button x:Name="btn_restart" Content="Újra" Width="150" Margin="100,0,0,0" Click="btn_restart_Click" Style="{StaticResource MainButtonStyle}" />
+                        <Button x:Name="btn_leaderboard" Content="&#xe473;" FontFamily="/CustomFonts/#Font Awesome 6 Free Solid" Height="50" Width="50" Margin="15,0,15,0" Click="btn_leaderboard_load" Style="{StaticResource MainButtonStyle}" />
+                        <Button x:Name="btn_QUIT" Content="&#xf08b;" FontFamily="/CustomFonts/#Font Awesome 6 Free Solid" Height="50" Width="50" Margin="0,0,0,0" Click="btn_quit_Click" Style="{StaticResource MainButtonStyle}" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Name="stckpnl_leaderboard" Width="485" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ComboBox x:Name="cb_megyek" Width="150" Margin="0,5,0,5" SelectionChanged="MegyeChanged" />
+                    <DataGrid x:Name="dtgrd_players" Height="230" ItemsSource="{Binding Path=LoadDataBinding}" IsReadOnly="True" ColumnWidth="242.5"/>
+                    <Button x:Name="btn_leaderboard_back" Height="30" Width="60" Content="Vissza" Margin="30,4,395,0" Click="backtolose" Style="{StaticResource MainButtonStyle}" />
+                </StackPanel>
+                <Button x:Name="btn_game" Click="Button_Click" Content="Várj">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="FontFamily" Value="/CustomFonts/#Karma Suture"/>
+                            <Setter Property="FontSize" Value="50"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="50">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FFDDDDDD"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

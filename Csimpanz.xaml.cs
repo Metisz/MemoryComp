@@ -92,12 +92,13 @@ namespace MemoryComp
 				};
 				//Mindegyik a Button_Click eseményt használja
 				gombok[j].Click += new RoutedEventHandler(Button_Click);
-				gombok[j].Width = 50;
-				gombok[j].Height = 50;
+				gombok[j].Width = 60;
+				gombok[j].Height = 60;
 				gombok[j].VerticalAlignment = VerticalAlignment.Top; gombok[j].HorizontalAlignment = HorizontalAlignment.Left;
 				//Random bal és felső margóval lehet random helyet adni nekik
 				gombok[j].Margin = new Thickness(rnd.Next(1, 750), rnd.Next(1, 550), 0, 0);
 				//Fel is rakja a gridre
+				gombok[j].Style = (Style)Resources["MainButtonStyle"];
 				this.Grid.Children.Add(gombok[j]);
 			}
 		}
