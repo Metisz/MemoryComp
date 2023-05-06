@@ -46,6 +46,7 @@ namespace MemoryComp
 				HasAccount = true;
 				this.ActiveAccount = ActiveAccount;
 				cb_megyek.SelectedIndex = ActiveAccount.Megyeid - 1;
+				MegyeToID = new Dictionary<string, int>();
 				if (connect.State == ConnectionState.Closed) connect.Open();
 				using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
 				{
@@ -60,7 +61,6 @@ namespace MemoryComp
 				connect.Close();
 				cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
 			}
-			MegyeToID = new Dictionary<string, int>();
 			stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Hidden;
 			timer = new DispatcherTimer();
@@ -203,7 +203,7 @@ namespace MemoryComp
 
 		private void backtolose(object sender, RoutedEventArgs e)
 		{
-            stckpnl_leaderboard.Visibility = Visibility.Hidden;
+      stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Visible;
 		}
 

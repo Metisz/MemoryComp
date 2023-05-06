@@ -72,13 +72,12 @@ namespace MemoryComp
 				}
 				connect.Close();
 			}
-			else btn_leaderboard.IsEnabled = false ;
+			else btn_leaderboard.IsEnabled = false;
 			stckpnl_lose.Visibility = Visibility.Visible;
 		}
 
 		void AddButton(int i) // i = a ponttal amit előtte elért
 		{
-			//Csinál egy listát, amiben i + 1 mennyiségű gomb van
 			gombok = new List<Button>();
 			for (int j = 0; j < i + 1; j++)
 			{
@@ -86,17 +85,13 @@ namespace MemoryComp
 				gombok[j] = new Button()
 				{
 					Content = Convert.ToString(j + 1),
-					//A gombok tagje egyenlő a listabeli indexükkel
 					Tag = j
 				};
-				//Mindegyik a Button_Click eseményt használja
 				gombok[j].Click += new RoutedEventHandler(Button_Click);
 				gombok[j].Width = 60;
 				gombok[j].Height = 60;
 				gombok[j].VerticalAlignment = VerticalAlignment.Top; gombok[j].HorizontalAlignment = HorizontalAlignment.Left;
-				//Random bal és felső margóval lehet random helyet adni nekik
 				gombok[j].Margin = new Thickness(rnd.Next(1, 750), rnd.Next(1, 550), 0, 0);
-				//Fel is rakja a gridre
 				gombok[j].Style = (Style)Resources["MainButtonStyle"];
 				this.Grid.Children.Add(gombok[j]);
 			}
@@ -104,10 +99,11 @@ namespace MemoryComp
 
 
 		public Csimpanz(Account ActiveAccount)
-		{ 
+		{
 			InitializeComponent();
 			if (ActiveAccount == null) { HasAccount = false; }
-            else {
+			else
+			{
 				HasAccount = true;
 				this.ActiveAccount = ActiveAccount;
 				cb_megyek.SelectedIndex = ActiveAccount.Megyeid - 1;
@@ -126,12 +122,12 @@ namespace MemoryComp
 				connect.Close();
 				cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
 			}
-			
-			
-			
+
+
+
 			stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Hidden;
-			AddButton(pont+1);
+			AddButton(pont + 1);
 		}
 
 
@@ -143,9 +139,6 @@ namespace MemoryComp
 				if (gombok[int.Parse((sender as Button).Tag.ToString()) - 1].IsEnabled == true)
 				{
 					Lose();
-
-					//this.Close();
-					//MessageBox.Show($"Összpont: {pont}", "Aztacsuhajjamegamindenségit");
 				}
 			}
 			else
@@ -159,7 +152,7 @@ namespace MemoryComp
 			{
 				pont++;
 				Grid.Children.Clear();
-				AddButton(pont+1);
+				AddButton(pont + 1);
 			}
 		}
 
@@ -178,9 +171,9 @@ namespace MemoryComp
 			Menu.ShowDialog();
 		}
 
-        private void btn_leaderboard_load(object sender, RoutedEventArgs e)
-        {
-            stckpnl_lose.Visibility = Visibility.Hidden;
+		private void btn_leaderboard_load(object sender, RoutedEventArgs e)
+		{
+			stckpnl_lose.Visibility = Visibility.Hidden;
 
 			if (connect.State == ConnectionState.Closed) connect.Open();
 			try
@@ -197,24 +190,25 @@ namespace MemoryComp
 			{
 				MessageBox.Show(ex.ToString());
 			}
-			finally {
+			finally
+			{
 				connect.Close();
 			}
 			connect.Close();
 
 			stckpnl_leaderboard.Visibility = Visibility.Visible;
 
-        }
+		}
 
-        private void backtolose(object sender, RoutedEventArgs e)
-        {
+		private void backtolose(object sender, RoutedEventArgs e)
+		{
 			stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Visible;
 		}
 
-        private void MegyeChanged(object sender, SelectionChangedEventArgs e)
-        {
+		private void MegyeChanged(object sender, SelectionChangedEventArgs e)
+		{
 			btn_leaderboard_load(sender, e);
-        }
-    }
+		}
+	}
 }

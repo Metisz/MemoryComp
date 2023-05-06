@@ -34,7 +34,7 @@ namespace MemoryComp
 		}
 
 
-		
+
 
 		private DispatcherTimer timer_cooldown;
 		DateTime FigyelKezd; TimeSpan Kulonbseg;
@@ -62,7 +62,7 @@ namespace MemoryComp
 				connect.Close();
 				cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
 			}
-			
+
 			stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Hidden;
 			timer_cooldown = new DispatcherTimer();
@@ -79,7 +79,7 @@ namespace MemoryComp
 
 		public void Start()
 		{
-			timer_cooldown.Interval = TimeSpan.FromMilliseconds(rnd.Next(1000,10000));
+			timer_cooldown.Interval = TimeSpan.FromMilliseconds(rnd.Next(1000, 10000));
 			btn_game.Content = "Várj...";
 			timer_cooldown.Start();
 		}
@@ -147,12 +147,12 @@ namespace MemoryComp
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-            if (btn_game.Background == Brushes.Green)
-            {
+			if (btn_game.Background == Brushes.Green)
+			{
 				Kulonbseg = DateTime.Now - FigyelKezd;
 				Pont = Convert.ToInt32(Kulonbseg.TotalMilliseconds);
 				Lose();
-            }
+			}
 		}
 
 		private void btn_leaderboard_load(object sender, RoutedEventArgs e)
