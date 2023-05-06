@@ -164,7 +164,7 @@ namespace MemoryComp
 			{
 				MySqlCommand cmd = new MySqlCommand("Select accounts.felhnev as 'Nevek', pontok.rekordpont as 'Pontok' from " +
 					"megyek INNER JOIN (accounts INNER JOIN (pontok INNER JOIN jatekok ON pontok.jatekid = jatekok.id) ON accounts.id = pontok.felhid) ON megyek.id = accounts.megyeid " +
-					$"WHERE jatekid = '{jatekid}' AND megyeid = '{MegyeToID[cb_megyek.SelectedItem.ToString()]}';", connect);
+					$"WHERE jatekid = '{jatekid}' AND megyeid = '{MegyeToID[cb_megyek.SelectedItem.ToString()]}' ORDER BY Pontok ASC;", connect);
 				MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
 				DataSet ds = new DataSet();
 				adp.Fill(ds, "LoadDataBinding");
