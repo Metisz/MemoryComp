@@ -12,7 +12,7 @@ namespace MemoryComp
 {
 	public partial class Reakcio : Window
 	{
-		int jatekid = 2;
+		int jatekid = 3;
 		MySqlConnection connect = new MySqlConnection(
 			"server = localhost; userid = root; password = ; database = MemoryComp"
 			);
@@ -21,8 +21,6 @@ namespace MemoryComp
 		public Random rnd = new Random();
 		private int pont = 0;
 		public Dictionary<string, int> MegyeToID;
-		private DispatcherTimer timer_cooldown;
-		DateTime FigyelKezd; TimeSpan Kulonbseg;
 		public int Pont
 		{
 			get
@@ -35,6 +33,11 @@ namespace MemoryComp
 			}
 		}
 
+
+		
+
+		private DispatcherTimer timer_cooldown;
+		DateTime FigyelKezd; TimeSpan Kulonbseg;
 		public Reakcio(Account ActiveAccount)
 		{
 			InitializeComponent();
@@ -44,21 +47,22 @@ namespace MemoryComp
 				HasAccount = true;
 				this.ActiveAccount = ActiveAccount;
 				cb_megyek.SelectedIndex = ActiveAccount.Megyeid - 1;
-			}
-			MegyeToID = new Dictionary<string, int>();
-			if (connect.State == ConnectionState.Closed) connect.Open();
-			using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
-			{
-				using (MySqlDataReader reader = GetMegyek.ExecuteReader())
+				MegyeToID = new Dictionary<string, int>();
+				if (connect.State == ConnectionState.Closed) connect.Open();
+				using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
 				{
-					while (reader.Read())
+					using (MySqlDataReader reader = GetMegyek.ExecuteReader())
 					{
-						MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+						while (reader.Read())
+						{
+							MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+						}
 					}
 				}
+				connect.Close();
+				cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
 			}
-			connect.Close();
-			cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
+			
 			stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Hidden;
 			timer_cooldown = new DispatcherTimer();

@@ -111,22 +111,24 @@ namespace MemoryComp
 				HasAccount = true;
 				this.ActiveAccount = ActiveAccount;
 				cb_megyek.SelectedIndex = ActiveAccount.Megyeid - 1;
-			}
-			
-			MegyeToID = new Dictionary<string, int>();
-			if (connect.State == ConnectionState.Closed) connect.Open();
-			using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
-			{
-				using (MySqlDataReader reader = GetMegyek.ExecuteReader())
+				MegyeToID = new Dictionary<string, int>();
+				if (connect.State == ConnectionState.Closed) connect.Open();
+				using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
 				{
-					while (reader.Read())
+					using (MySqlDataReader reader = GetMegyek.ExecuteReader())
 					{
-						MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+						while (reader.Read())
+						{
+							MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+						}
 					}
 				}
+				connect.Close();
+				cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
 			}
-			connect.Close();
-			cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
+			
+			
+			
 			stckpnl_leaderboard.Visibility = Visibility.Hidden;
 			stckpnl_lose.Visibility = Visibility.Hidden;
 			AddButton(pont+1);

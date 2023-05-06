@@ -131,9 +131,6 @@ namespace MemoryComp
 				MessageBox.Show(hibatext, "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
 
 			}
-			//grd_lar_2.Width = new System.Windows.GridLength(0);
-			//grd_lar.Width = 277.7;
-			//btn_lar.Content = "Bejelentkezés";
 		}
 
 
@@ -152,24 +149,31 @@ namespace MemoryComp
 		{
 			if (sender == mmenu_account)
 			{
-				MegyeToID = new Dictionary<string, int>();
-				if (connect.State == ConnectionState.Closed) connect.Open();
-				using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
+				try
 				{
-					using (MySqlDataReader reader = GetMegyek.ExecuteReader())
+					MegyeToID = new Dictionary<string, int>();
+					if (connect.State == ConnectionState.Closed) connect.Open();
+					using (MySqlCommand GetMegyek = new MySqlCommand($"SELECT * FROM megyek", connect))
 					{
-						while (reader.Read())
+						using (MySqlDataReader reader = GetMegyek.ExecuteReader())
 						{
-							MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+							while (reader.Read())
+							{
+								MegyeToID.Add(reader.GetString(1), reader.GetInt32(0));
+							}
 						}
 					}
+					connect.Close();
+					rgstr_cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
+					main_menu.Visibility = Visibility.Hidden;
+					tabctrl_menus.Visibility = Visibility.Visible;
+					TabItems(true, true, false);
+					tabctrl_menus.SelectedItem = tabitem_login;
 				}
-				connect.Close();
-				rgstr_cb_megyek.ItemsSource = MegyeToID.Keys.ToList();
-				main_menu.Visibility = Visibility.Hidden;
-				tabctrl_menus.Visibility = Visibility.Visible;
-				TabItems(true, true, false);
-				tabctrl_menus.SelectedItem = tabitem_login;
+				catch (Exception)
+				{
+					MessageBox.Show("Nem sikerült kapcsolatot teremteni az adatbázissal!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
 			}
 			if (sender == mmenu_guest)
 			{
