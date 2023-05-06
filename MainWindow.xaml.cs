@@ -25,9 +25,6 @@ namespace MemoryComp
 		{
 			InitializeComponent();
 			TabItems(false, false, false);
-			//string[] Megyek = new string[19] { "Bács-Kiskun", "Baranya", "Békés", "Borsod-Abaúj-Zemplén", "Csongrád-Csanád", "Fejér", "Győr-Moson-Sopron", "Hajdú-Bihar", "Heves", "Jász-Nagykun-Szolnok", "Komárom-Esztergom", "Nógrád", "Pest", "Somogy", "Szabolcs-Szatmár-Bereg", "Tolna", "Vas", "Veszprém", "Zala" };
-			
-			
 			ControlTemplate ct = rgstr_cb_megyek.Template;
 		}
 		private void rgstr_cb_megyek_loaded(object sender, RoutedEventArgs e)
@@ -116,6 +113,7 @@ namespace MemoryComp
 				finally
 				{
 					connect.Close();
+					MessageBox.Show("Sikeres Regisztráció!", "", MessageBoxButton.OK, MessageBoxImage.Information);
 				}
 			}
 			else

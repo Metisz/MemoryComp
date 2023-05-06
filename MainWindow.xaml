@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        Icon="/Images/brainstorm.png">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,7 +24,7 @@
 
     <Border CornerRadius="53">
         <Border.Background>
-            <ImageBrush ImageSource="/Images/pexels-gdtography-911738.jpg" Stretch="Fill"/>
+            <ImageBrush ImageSource="/Images/background.jpg" Stretch="Fill"/>
         </Border.Background>
 
         <Border CornerRadius="50" BorderThickness="5" Opacity="0.95">

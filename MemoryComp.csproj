@@ -181,7 +181,7 @@
     <Resource Include="Images\background.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\pexels-gdtography-911738.jpg" />
+    <Resource Include="Images\brainstorm.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

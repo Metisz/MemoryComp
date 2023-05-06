@@ -129,7 +129,6 @@ namespace MemoryComp
 							RegisterCMD.CommandType = CommandType.Text;
 							RegisterCMD.ExecuteNonQuery();
 							connect.Close();
-							MessageBox.Show("jej");
 						}
 					}
 				}
